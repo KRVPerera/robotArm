@@ -29,19 +29,22 @@ namespace RobotInteractive_Windows
             string PortNm = null;
 
             PortNames = SerialPort.GetPortNames();
+            Array.Sort(PortNames);
+
             try
                 {
             do
             {
                 index += 1;
                 
-                    PortNamesRTB.Text += PortNames[index] + "\n";
+                   // PortNamesRTB.Text += PortNames[index] + "\n";
+               ComboPorts.Items.Add(PortNames[index]);
               
             } while (!((PortNames[index] == PortNm)) || (index == PortNames.GetUpperBound(0)));
                 }
             catch (IndexOutOfRangeException)
             {
-                MessageBox.Show("Array");
+                MessageBox.Show("Reading COM ports");
             }
         }
 

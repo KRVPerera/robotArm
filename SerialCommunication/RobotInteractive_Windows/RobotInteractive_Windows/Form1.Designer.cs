@@ -30,6 +30,7 @@
         {
             this.GetPortsB = new System.Windows.Forms.Button();
             this.PortNamesRTB = new System.Windows.Forms.RichTextBox();
+            this.ComboPorts = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // GetPortsB
@@ -50,11 +51,20 @@
             this.PortNamesRTB.TabIndex = 2;
             this.PortNamesRTB.Text = "";
             // 
+            // ComboPorts
+            // 
+            this.ComboPorts.FormattingEnabled = true;
+            this.ComboPorts.Location = new System.Drawing.Point(33, 14);
+            this.ComboPorts.Name = "ComboPorts";
+            this.ComboPorts.Size = new System.Drawing.Size(121, 21);
+            this.ComboPorts.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.ComboPorts);
             this.Controls.Add(this.PortNamesRTB);
             this.Controls.Add(this.GetPortsB);
             this.Name = "Form1";
@@ -68,6 +78,7 @@
 
         private System.Windows.Forms.Button GetPortsB;
         private System.Windows.Forms.RichTextBox PortNamesRTB;
+        private System.Windows.Forms.ComboBox ComboPorts;
     }
 }
 
