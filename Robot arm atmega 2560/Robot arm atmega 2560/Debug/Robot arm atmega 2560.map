@@ -18,12 +18,17 @@ Discarded input sections
  .text.setENCB  0x00000000        0x8 Robot arm atmega 2560.o
  .text.stopAtHome
                 0x00000000       0x12 Robot arm atmega 2560.o
+<<<<<<< HEAD
  .text.motorObjectSetup
                 0x00000000        0x2 Robot arm atmega 2560.o
  .text.checkHomeSwiches
                 0x00000000        0x8 Robot arm atmega 2560.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1051/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1051/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
+=======
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr6\libgcc.a(_exit.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr6\libgcc.a(_exit.o)
+>>>>>>> c1d778d9278ba6bb1e03f0d0267254f1260e6b08
  .text.libgcc.mul
                 0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1051/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
  .text.libgcc.div
@@ -169,7 +174,11 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
+<<<<<<< HEAD
 .text           0x00000000      0x246
+=======
+.text           0x00000000      0x342
+>>>>>>> c1d778d9278ba6bb1e03f0d0267254f1260e6b08
  *(.vectors)
  .vectors       0x00000000       0xe4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1051/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
                 0x00000000                __vector_default
@@ -262,6 +271,7 @@ END GROUP
                 0x00000108                __vector_4
                 0x00000108                __vector_44
                 0x00000108                __vector_51
+                0x00000108                __vector_9
                 0x00000108                __vector_2
                 0x00000108                __vector_21
                 0x00000108                __vector_15
@@ -273,7 +283,6 @@ END GROUP
                 0x00000108                __vector_48
                 0x00000108                __vector_14
                 0x00000108                __vector_53
-                0x00000108                __vector_10
                 0x00000108                __vector_50
                 0x00000108                __vector_16
                 0x00000108                __vector_18
@@ -282,12 +291,16 @@ END GROUP
                 0x0000010a                . = ALIGN (0x2)
  *(.text.*)
  .text.__vector_1
-                0x0000010a       0x62 Robot arm atmega 2560.o
+                0x0000010a       0x66 Robot arm atmega 2560.o
                 0x0000010a                __vector_1
- .text.__vector_9
-                0x0000016c       0x4a Robot arm atmega 2560.o
-                0x0000016c                __vector_9
+ .text.__vector_10
+                0x00000170       0x4e Robot arm atmega 2560.o
+                0x00000170                __vector_10
+ .text.motorObjectSetup
+                0x000001be       0x24 Robot arm atmega 2560.o
+                0x000001be                motorObjectSetup
  .text.pinSetup
+<<<<<<< HEAD
                 0x000001b6       0x26 Robot arm atmega 2560.o
                 0x000001b6                pinSetup
  .text.initialize
@@ -303,6 +316,26 @@ END GROUP
  .fini9         0x00000242        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1051/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
                 0x00000242                _exit
                 0x00000242                exit
+=======
+                0x000001e2       0x28 Robot arm atmega 2560.o
+                0x000001e2                pinSetup
+ .text.checkHomeSwiches
+                0x0000020a        0x8 Robot arm atmega 2560.o
+                0x0000020a                checkHomeSwiches
+ .text.initialize
+                0x00000212        0xa Robot arm atmega 2560.o
+                0x00000212                initialize
+ .text.pollMotor
+                0x0000021c       0x56 Robot arm atmega 2560.o
+                0x0000021c                pollMotor
+ .text.main     0x00000272       0xcc Robot arm atmega 2560.o
+                0x00000272                main
+                0x0000033e                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x0000033e        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr6\libgcc.a(_exit.o)
+                0x0000033e                _exit
+                0x0000033e                exit
+>>>>>>> c1d778d9278ba6bb1e03f0d0267254f1260e6b08
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -321,11 +354,19 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
+<<<<<<< HEAD
  .fini0         0x00000242        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1051/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/avr6\libgcc.a(_exit.o)
  *(.fini0)
                 0x00000246                _etext = .
 
 .data           0x00800200        0x0 load address 0x00000246
+=======
+ .fini0         0x0000033e        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr6\libgcc.a(_exit.o)
+ *(.fini0)
+                0x00000342                _etext = .
+
+.data           0x00800200        0x0 load address 0x00000342
+>>>>>>> c1d778d9278ba6bb1e03f0d0267254f1260e6b08
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800200        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.1051/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr6/crtm2560.o
@@ -348,8 +389,13 @@ END GROUP
  COMMON         0x00800200        0x2 Robot arm atmega 2560.o
                 0x00800200                M0
                 0x00800202                PROVIDE (__bss_end, .)
+<<<<<<< HEAD
                 0x00000246                __data_load_start = LOADADDR (.data)
                 0x00000246                __data_load_end = (__data_load_start + SIZEOF (.data))
+=======
+                0x00000342                __data_load_start = LOADADDR (.data)
+                0x00000342                __data_load_end = (__data_load_start + SIZEOF (.data))
+>>>>>>> c1d778d9278ba6bb1e03f0d0267254f1260e6b08
 
 .noinit         0x00800202        0x0
                 0x00800202                PROVIDE (__noinit_start, .)
@@ -423,6 +469,7 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
+<<<<<<< HEAD
 .debug_info     0x00000000      0x2cb
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x2cb Robot arm atmega 2560.o
@@ -434,19 +481,40 @@ END GROUP
 .debug_line     0x00000000      0x257
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x257 Robot arm atmega 2560.o
+=======
+.debug_info     0x00000000      0x488
+ *(.debug_info)
+ .debug_info    0x00000000      0x488 Robot arm atmega 2560.o
+ *(.gnu.linkonce.wi.*)
 
-.debug_frame    0x00000000       0xf4
+.debug_abbrev   0x00000000      0x1a4
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000      0x1a4 Robot arm atmega 2560.o
+
+.debug_line     0x00000000      0x3e4
+ *(.debug_line)
+ .debug_line    0x00000000      0x3e4 Robot arm atmega 2560.o
+>>>>>>> c1d778d9278ba6bb1e03f0d0267254f1260e6b08
+
+.debug_frame    0x00000000      0x104
  *(.debug_frame)
- .debug_frame   0x00000000       0xf4 Robot arm atmega 2560.o
+ .debug_frame   0x00000000      0x104 Robot arm atmega 2560.o
 
+<<<<<<< HEAD
 .debug_str      0x00000000      0x241
  *(.debug_str)
  .debug_str     0x00000000      0x241 Robot arm atmega 2560.o
                                 0x285 (size before relaxing)
+=======
+.debug_str      0x00000000      0x225
+ *(.debug_str)
+ .debug_str     0x00000000      0x225 Robot arm atmega 2560.o
+                                0x269 (size before relaxing)
+>>>>>>> c1d778d9278ba6bb1e03f0d0267254f1260e6b08
 
-.debug_loc      0x00000000      0x116
+.debug_loc      0x00000000      0x15d
  *(.debug_loc)
- .debug_loc     0x00000000      0x116 Robot arm atmega 2560.o
+ .debug_loc     0x00000000      0x15d Robot arm atmega 2560.o
 
 .debug_macinfo
  *(.debug_macinfo)

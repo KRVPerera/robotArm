@@ -3,6 +3,7 @@ Robot arm atmega 2560.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
+<<<<<<< HEAD
   0 .data         00000000  00800200  00000246  000002da  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   1 .text         00000246  00000000  00000000  00000094  2**1
@@ -26,6 +27,35 @@ Idx Name          Size      VMA       LMA       File off  Algn
  10 .debug_loc    00000116  00000000  00000000  00000d39  2**0
                   CONTENTS, READONLY, DEBUGGING
  11 .debug_ranges 00000058  00000000  00000000  00000e4f  2**0
+=======
+  0 .data         00000000  00800200  00000342  000003d6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000342  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000002  00800200  00800200  000003d6  2**0
+                  ALLOC
+  3 .stab         000006e4  00000000  00000000  000003d8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000097  00000000  00000000  00000abc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .comment      0000002f  00000000  00000000  00000b53  2**0
+                  CONTENTS, READONLY
+  6 .debug_aranges 00000068  00000000  00000000  00000b82  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   00000488  00000000  00000000  00000bea  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 000001a4  00000000  00000000  00001072  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   000003e4  00000000  00000000  00001216  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_frame  00000104  00000000  00000000  000015fc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_str    00000225  00000000  00000000  00001700  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_loc    0000015d  00000000  00000000  00001925  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 00000058  00000000  00000000  00001a82  2**0
+>>>>>>> c1d778d9278ba6bb1e03f0d0267254f1260e6b08
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -49,9 +79,9 @@ Disassembly of section .text:
   1e:	00 00       	nop
   20:	73 c0       	rjmp	.+230    	; 0x108 <__bad_interrupt>
   22:	00 00       	nop
-  24:	a3 c0       	rjmp	.+326    	; 0x16c <__vector_9>
+  24:	71 c0       	rjmp	.+226    	; 0x108 <__bad_interrupt>
   26:	00 00       	nop
-  28:	6f c0       	rjmp	.+222    	; 0x108 <__bad_interrupt>
+  28:	a3 c0       	rjmp	.+326    	; 0x170 <__vector_10>
   2a:	00 00       	nop
   2c:	6d c0       	rjmp	.+218    	; 0x108 <__bad_interrupt>
   2e:	00 00       	nop
@@ -169,19 +199,33 @@ Disassembly of section .text:
   fe:	a2 30       	cpi	r26, 0x02	; 2
  100:	b2 07       	cpc	r27, r18
  102:	e1 f7       	brne	.-8      	; 0xfc <.do_clear_bss_loop>
+<<<<<<< HEAD
  104:	94 d0       	rcall	.+296    	; 0x22e <main>
  106:	9d c0       	rjmp	.+314    	; 0x242 <_exit>
+=======
+ 104:	b6 d0       	rcall	.+364    	; 0x272 <main>
+ 106:	1b c1       	rjmp	.+566    	; 0x33e <_exit>
+>>>>>>> c1d778d9278ba6bb1e03f0d0267254f1260e6b08
 
 00000108 <__bad_interrupt>:
  108:	7b cf       	rjmp	.-266    	; 0x0 <__vectors>
 
 0000010a <__vector_1>:
+<<<<<<< HEAD
 
 void checkHomeSwiches(struct Motor *motor){
 	//set the switch state before begin
 	//have to write following code for each motor
 	if(SWM0 == SWITCHE_PRESSED){
 		motor->HomeSwitchState = SWITCHE_PRESSED;
+=======
+	COMMANDS
+*/
+//this is a command function to stop at home
+void stopAtHome(struct Motor *motor){
+	if(motor->HomeSwitchState == TRUE){
+		motor->running = FALSE;
+>>>>>>> c1d778d9278ba6bb1e03f0d0267254f1260e6b08
  10a:	1f 92       	push	r1
  10c:	0f 92       	push	r0
  10e:	0f b6       	in	r0, 0x3f	; 63
@@ -193,80 +237,83 @@ void checkHomeSwiches(struct Motor *motor){
  11a:	9f 93       	push	r25
  11c:	ef 93       	push	r30
  11e:	ff 93       	push	r31
- 120:	e0 91 00 02 	lds	r30, 0x0200
- 124:	f0 91 01 02 	lds	r31, 0x0201
- 128:	84 85       	ldd	r24, Z+12	; 0x0c
- 12a:	95 85       	ldd	r25, Z+13	; 0x0d
- 12c:	01 97       	sbiw	r24, 0x01	; 1
- 12e:	51 f4       	brne	.+20     	; 0x144 <__vector_1+0x3a>
- 130:	84 81       	ldd	r24, Z+4	; 0x04
- 132:	95 81       	ldd	r25, Z+5	; 0x05
- 134:	01 96       	adiw	r24, 0x01	; 1
- 136:	95 83       	std	Z+5, r25	; 0x05
- 138:	84 83       	std	Z+4, r24	; 0x04
- 13a:	81 e0       	ldi	r24, 0x01	; 1
- 13c:	90 e0       	ldi	r25, 0x00	; 0
- 13e:	93 83       	std	Z+3, r25	; 0x03
- 140:	82 83       	std	Z+2, r24	; 0x02
- 142:	09 c0       	rjmp	.+18     	; 0x156 <__vector_1+0x4c>
- 144:	84 81       	ldd	r24, Z+4	; 0x04
- 146:	95 81       	ldd	r25, Z+5	; 0x05
- 148:	01 97       	sbiw	r24, 0x01	; 1
- 14a:	95 83       	std	Z+5, r25	; 0x05
- 14c:	84 83       	std	Z+4, r24	; 0x04
- 14e:	8f ef       	ldi	r24, 0xFF	; 255
- 150:	9f ef       	ldi	r25, 0xFF	; 255
- 152:	93 83       	std	Z+3, r25	; 0x03
- 154:	82 83       	std	Z+2, r24	; 0x02
- 156:	ff 91       	pop	r31
- 158:	ef 91       	pop	r30
- 15a:	9f 91       	pop	r25
- 15c:	8f 91       	pop	r24
- 15e:	0f 90       	pop	r0
- 160:	0b be       	out	0x3b, r0	; 59
+ 120:	f8 94       	cli
+ 122:	00 9b       	sbis	0x00, 0	; 0
+ 124:	0e c0       	rjmp	.+28     	; 0x142 <__vector_1+0x38>
+ 126:	e0 91 00 02 	lds	r30, 0x0200
+ 12a:	f0 91 01 02 	lds	r31, 0x0201
+ 12e:	84 81       	ldd	r24, Z+4	; 0x04
+ 130:	95 81       	ldd	r25, Z+5	; 0x05
+ 132:	01 96       	adiw	r24, 0x01	; 1
+ 134:	95 83       	std	Z+5, r25	; 0x05
+ 136:	84 83       	std	Z+4, r24	; 0x04
+ 138:	81 e0       	ldi	r24, 0x01	; 1
+ 13a:	90 e0       	ldi	r25, 0x00	; 0
+ 13c:	93 83       	std	Z+3, r25	; 0x03
+ 13e:	82 83       	std	Z+2, r24	; 0x02
+ 140:	0b c0       	rjmp	.+22     	; 0x158 <__vector_1+0x4e>
+ 142:	e0 91 00 02 	lds	r30, 0x0200
+ 146:	f0 91 01 02 	lds	r31, 0x0201
+ 14a:	84 81       	ldd	r24, Z+4	; 0x04
+ 14c:	95 81       	ldd	r25, Z+5	; 0x05
+ 14e:	01 97       	sbiw	r24, 0x01	; 1
+ 150:	95 83       	std	Z+5, r25	; 0x05
+ 152:	84 83       	std	Z+4, r24	; 0x04
+ 154:	13 82       	std	Z+3, r1	; 0x03
+ 156:	12 82       	std	Z+2, r1	; 0x02
+ 158:	78 94       	sei
+ 15a:	ff 91       	pop	r31
+ 15c:	ef 91       	pop	r30
+ 15e:	9f 91       	pop	r25
+ 160:	8f 91       	pop	r24
  162:	0f 90       	pop	r0
- 164:	0f be       	out	0x3f, r0	; 63
+ 164:	0b be       	out	0x3b, r0	; 59
  166:	0f 90       	pop	r0
- 168:	1f 90       	pop	r1
- 16a:	18 95       	reti
+ 168:	0f be       	out	0x3f, r0	; 63
+ 16a:	0f 90       	pop	r0
+ 16c:	1f 90       	pop	r1
+ 16e:	18 95       	reti
 
-0000016c <__vector_9>:
- 16c:	1f 92       	push	r1
- 16e:	0f 92       	push	r0
- 170:	0f b6       	in	r0, 0x3f	; 63
+00000170 <__vector_10>:
+ 170:	1f 92       	push	r1
  172:	0f 92       	push	r0
- 174:	11 24       	eor	r1, r1
- 176:	0b b6       	in	r0, 0x3b	; 59
- 178:	0f 92       	push	r0
- 17a:	8f 93       	push	r24
- 17c:	9f 93       	push	r25
- 17e:	ef 93       	push	r30
- 180:	ff 93       	push	r31
- 182:	e0 91 00 02 	lds	r30, 0x0200
- 186:	f0 91 01 02 	lds	r31, 0x0201
- 18a:	86 81       	ldd	r24, Z+6	; 0x06
- 18c:	97 81       	ldd	r25, Z+7	; 0x07
- 18e:	01 97       	sbiw	r24, 0x01	; 1
- 190:	19 f4       	brne	.+6      	; 0x198 <__vector_9+0x2c>
- 192:	17 82       	std	Z+7, r1	; 0x07
- 194:	16 82       	std	Z+6, r1	; 0x06
- 196:	04 c0       	rjmp	.+8      	; 0x1a0 <__vector_9+0x34>
- 198:	81 e0       	ldi	r24, 0x01	; 1
- 19a:	90 e0       	ldi	r25, 0x00	; 0
- 19c:	97 83       	std	Z+7, r25	; 0x07
- 19e:	86 83       	std	Z+6, r24	; 0x06
- 1a0:	ff 91       	pop	r31
- 1a2:	ef 91       	pop	r30
- 1a4:	9f 91       	pop	r25
- 1a6:	8f 91       	pop	r24
- 1a8:	0f 90       	pop	r0
- 1aa:	0b be       	out	0x3b, r0	; 59
- 1ac:	0f 90       	pop	r0
- 1ae:	0f be       	out	0x3f, r0	; 63
+ 174:	0f b6       	in	r0, 0x3f	; 63
+ 176:	0f 92       	push	r0
+ 178:	11 24       	eor	r1, r1
+ 17a:	0b b6       	in	r0, 0x3b	; 59
+ 17c:	0f 92       	push	r0
+ 17e:	8f 93       	push	r24
+ 180:	9f 93       	push	r25
+ 182:	ef 93       	push	r30
+ 184:	ff 93       	push	r31
+ 186:	f8 94       	cli
+ 188:	e0 91 00 02 	lds	r30, 0x0200
+ 18c:	f0 91 01 02 	lds	r31, 0x0201
+ 190:	86 81       	ldd	r24, Z+6	; 0x06
+ 192:	97 81       	ldd	r25, Z+7	; 0x07
+ 194:	01 97       	sbiw	r24, 0x01	; 1
+ 196:	19 f4       	brne	.+6      	; 0x19e <__vector_10+0x2e>
+ 198:	17 82       	std	Z+7, r1	; 0x07
+ 19a:	16 82       	std	Z+6, r1	; 0x06
+ 19c:	04 c0       	rjmp	.+8      	; 0x1a6 <__vector_10+0x36>
+ 19e:	81 e0       	ldi	r24, 0x01	; 1
+ 1a0:	90 e0       	ldi	r25, 0x00	; 0
+ 1a2:	97 83       	std	Z+7, r25	; 0x07
+ 1a4:	86 83       	std	Z+6, r24	; 0x06
+ 1a6:	78 94       	sei
+ 1a8:	ff 91       	pop	r31
+ 1aa:	ef 91       	pop	r30
+ 1ac:	9f 91       	pop	r25
+ 1ae:	8f 91       	pop	r24
  1b0:	0f 90       	pop	r0
- 1b2:	1f 90       	pop	r1
- 1b4:	18 95       	reti
+ 1b2:	0b be       	out	0x3b, r0	; 59
+ 1b4:	0f 90       	pop	r0
+ 1b6:	0f be       	out	0x3f, r0	; 63
+ 1b8:	0f 90       	pop	r0
+ 1ba:	1f 90       	pop	r1
+ 1bc:	18 95       	reti
 
+<<<<<<< HEAD
 000001b6 <pinSetup>:
  1b6:	10 92 04 01 	sts	0x0104, r1
  1ba:	8e e1       	ldi	r24, 0x1E	; 30
@@ -291,12 +338,108 @@ void checkHomeSwiches(struct Motor *motor){
  1e8:	08 95       	ret
 
 000001ea <pollMotor>:
+=======
+000001be <motorObjectSetup>:
+	}
+}
+
+/*INITIALIZING*/
+	void motorObjectSetup(struct Motor *motor){
+ 1be:	fc 01       	movw	r30, r24
+	motor->running = TRUE;
+ 1c0:	81 e0       	ldi	r24, 0x01	; 1
+ 1c2:	90 e0       	ldi	r25, 0x00	; 0
+ 1c4:	91 83       	std	Z+1, r25	; 0x01
+ 1c6:	80 83       	st	Z, r24
+	motor->directionToRotate = LEFT;
+ 1c8:	17 86       	std	Z+15, r1	; 0x0f
+ 1ca:	16 86       	std	Z+14, r1	; 0x0e
+	motor->maxRevolutionsLeft = -1000;
+ 1cc:	88 e1       	ldi	r24, 0x18	; 24
+ 1ce:	9c ef       	ldi	r25, 0xFC	; 252
+ 1d0:	93 87       	std	Z+11, r25	; 0x0b
+ 1d2:	82 87       	std	Z+10, r24	; 0x0a
+	motor->maxRevolutionsRight = 1000;
+ 1d4:	88 ee       	ldi	r24, 0xE8	; 232
+ 1d6:	93 e0       	ldi	r25, 0x03	; 3
+ 1d8:	91 87       	std	Z+9, r25	; 0x09
+ 1da:	80 87       	std	Z+8, r24	; 0x08
+	motor->relativeRevolutions = 0;
+ 1dc:	15 82       	std	Z+5, r1	; 0x05
+ 1de:	14 82       	std	Z+4, r1	; 0x04
+ 1e0:	08 95       	ret
+
+000001e2 <pinSetup>:
+
+}
+
+void pinSetup(){
+	DDRJ = 0x0;//PCINT for switches
+ 1e2:	10 92 04 01 	sts	0x0104, r1
+	DDRD = 0x1E;//INT for Encoder-A
+ 1e6:	8e e1       	ldi	r24, 0x1E	; 30
+ 1e8:	8a b9       	out	0x0a, r24	; 10
+	DDRE = 0xF0;//INT for Encoder-A
+ 1ea:	80 ef       	ldi	r24, 0xF0	; 240
+ 1ec:	8d b9       	out	0x0d, r24	; 13
+	DDRA = 0;
+ 1ee:	11 b8       	out	0x01, r1	; 1
+	
+	//temp code
+	DDRB = 0xFF;//PWM and Direction controlling
+ 1f0:	8f ef       	ldi	r24, 0xFF	; 255
+ 1f2:	84 b9       	out	0x04, r24	; 4
+	
+	//end temp code
+	
+	
+	//Setup external interrupts
+	EIMSK = 0xFF;//Enabling interrups 7:0
+ 1f4:	8d bb       	out	0x1d, r24	; 29
+	EICRA = 0xFF;//Enabling Rising edge interrupts for INT 3:0
+ 1f6:	80 93 69 00 	sts	0x0069, r24
+	EICRB = 0xFF;//Enabling Rising edge interrupst for INT 7:4
+ 1fa:	80 93 6a 00 	sts	0x006A, r24
+	//setup pin change interrups
+	PCMSK1 = 0xFF;//Enabling PCinterrupts 15:8, but we want only 15:9/J6:J0
+ 1fe:	80 93 6c 00 	sts	0x006C, r24
+	PCICR = (1<<PCIE1);//Enabling PCinterrupts 15:8, but we want only 15:9/J6:J0 
+ 202:	82 e0       	ldi	r24, 0x02	; 2
+ 204:	80 93 68 00 	sts	0x0068, r24
+ 208:	08 95       	ret
+
+0000020a <checkHomeSwiches>:
+
+void checkHomeSwiches(struct Motor *motor){
+	//set the switch state before begin
+	//have to write following code for each motor
+	if(SWM0 == SWITCHE_PRESSED){
+		motor->HomeSwitchState = SWITCHE_PRESSED;
+ 20a:	fc 01       	movw	r30, r24
+ 20c:	17 82       	std	Z+7, r1	; 0x07
+ 20e:	16 82       	std	Z+6, r1	; 0x06
+ 210:	08 95       	ret
+
+00000212 <initialize>:
+	//setup pin change interrups
+	PCMSK1 = 0xFF;//Enabling PCinterrupts 15:8, but we want only 15:9/J6:J0
+	PCICR = (1<<PCIE1);//Enabling PCinterrupts 15:8, but we want only 15:9/J6:J0 
+}
+void initialize(){
+	checkHomeSwiches(M0);
+ 212:	80 91 00 02 	lds	r24, 0x0200
+ 216:	90 91 01 02 	lds	r25, 0x0201
+ 21a:	f7 cf       	rjmp	.-18     	; 0x20a <checkHomeSwiches>
+
+0000021c <pollMotor>:
+>>>>>>> c1d778d9278ba6bb1e03f0d0267254f1260e6b08
 	}
 }
 
 //main poll function
 //only for testing M0
 void pollMotor(struct Motor *motor){
+<<<<<<< HEAD
  1ea:	fc 01       	movw	r30, r24
 	PORTB = (1<<PB7);//test led
  1ec:	80 e8       	ldi	r24, 0x80	; 128
@@ -351,12 +494,104 @@ void pollMotor(struct Motor *motor){
  22c:	08 95       	ret
 
 0000022e <main>:
+=======
+ 21c:	fc 01       	movw	r30, r24
+	//run stop motor
+	if(motor->running == TRUE){
+ 21e:	80 81       	ld	r24, Z
+ 220:	91 81       	ldd	r25, Z+1	; 0x01
+ 222:	01 97       	sbiw	r24, 0x01	; 1
+ 224:	19 f4       	brne	.+6      	; 0x22c <pollMotor+0x10>
+		RUNPORTB = (TRUE<<RUNM0);
+ 226:	80 e1       	ldi	r24, 0x10	; 16
+ 228:	85 b9       	out	0x05, r24	; 5
+ 22a:	01 c0       	rjmp	.+2      	; 0x22e <pollMotor+0x12>
+	}
+	else{
+		RUNPORTB = (FALSE<<RUNM0);
+ 22c:	15 b8       	out	0x05, r1	; 5
+	}
+	//change the rotating direction
+	if(motor->directionToRotate == RIGHT){//rotate right
+ 22e:	86 85       	ldd	r24, Z+14	; 0x0e
+ 230:	97 85       	ldd	r25, Z+15	; 0x0f
+ 232:	81 30       	cpi	r24, 0x01	; 1
+ 234:	91 05       	cpc	r25, r1
+ 236:	11 f4       	brne	.+4      	; 0x23c <pollMotor+0x20>
+		DIRECTIONPORT = (RIGHT<<DIRM0)|(DIRECTIONPORT);
+ 238:	28 9a       	sbi	0x05, 0	; 5
+ 23a:	04 c0       	rjmp	.+8      	; 0x244 <pollMotor+0x28>
+		//PORTB = (1<<PB0)|(PORTB);
+	}
+	else if(motor->directionToRotate == LEFT){//rotate left
+ 23c:	89 2b       	or	r24, r25
+ 23e:	11 f4       	brne	.+4      	; 0x244 <pollMotor+0x28>
+		DIRECTIONPORT = (LEFT<<DIRM0)|(DIRECTIONPORT);
+ 240:	85 b1       	in	r24, 0x05	; 5
+ 242:	85 b9       	out	0x05, r24	; 5
+		//PORTB = (0<<PB0)|(PORTB);
+	}
+	//stop the motor if limits reached
+	if(((motor->relativeRevolutions)>= (motor->maxRevolutionsRight))||((motor->relativeRevolutions)<=(motor->maxRevolutionsLeft))){
+ 244:	84 81       	ldd	r24, Z+4	; 0x04
+ 246:	95 81       	ldd	r25, Z+5	; 0x05
+ 248:	20 85       	ldd	r18, Z+8	; 0x08
+ 24a:	31 85       	ldd	r19, Z+9	; 0x09
+ 24c:	82 17       	cp	r24, r18
+ 24e:	93 07       	cpc	r25, r19
+ 250:	2c f4       	brge	.+10     	; 0x25c <pollMotor+0x40>
+ 252:	22 85       	ldd	r18, Z+10	; 0x0a
+ 254:	33 85       	ldd	r19, Z+11	; 0x0b
+ 256:	28 17       	cp	r18, r24
+ 258:	39 07       	cpc	r19, r25
+ 25a:	14 f0       	brlt	.+4      	; 0x260 <pollMotor+0x44>
+		motor->running = FALSE;
+ 25c:	11 82       	std	Z+1, r1	; 0x01
+ 25e:	10 82       	st	Z, r1
+	}
+	//test check the switch
+	if(motor->HomeSwitchState == SWITCHE_PRESSED){//test
+ 260:	86 81       	ldd	r24, Z+6	; 0x06
+ 262:	97 81       	ldd	r25, Z+7	; 0x07
+ 264:	89 2b       	or	r24, r25
+ 266:	11 f4       	brne	.+4      	; 0x26c <pollMotor+0x50>
+		PORTB = ((1<<PB7)|(PORTB));
+ 268:	2f 9a       	sbi	0x05, 7	; 5
+ 26a:	08 95       	ret
+		//_delay_ms(500);
+	}
+	else{
+		PORTB = ((0<<PB7)|(PORTB));
+ 26c:	85 b1       	in	r24, 0x05	; 5
+ 26e:	85 b9       	out	0x05, r24	; 5
+ 270:	08 95       	ret
+
+00000272 <main>:
+
+//commands
+void stopAtHome();//stops the motors if they are in home position
+>>>>>>> c1d778d9278ba6bb1e03f0d0267254f1260e6b08
 void rotateRight();
 
 int main(void){
-	
-	motorObjectSetup(M0);
+ 272:	cf 93       	push	r28
+ 274:	df 93       	push	r29
+ 276:	cd b7       	in	r28, 0x3d	; 61
+ 278:	de b7       	in	r29, 0x3e	; 62
+ 27a:	60 97       	sbiw	r28, 0x10	; 16
+ 27c:	0f b6       	in	r0, 0x3f	; 63
+ 27e:	f8 94       	cli
+ 280:	de bf       	out	0x3e, r29	; 62
+ 282:	0f be       	out	0x3f, r0	; 63
+ 284:	cd bf       	out	0x3d, r28	; 61
+	struct Motor MtestM;
+	M0 = &MtestM;
+ 286:	ce 01       	movw	r24, r28
+ 288:	01 96       	adiw	r24, 0x01	; 1
+ 28a:	90 93 01 02 	sts	0x0201, r25
+ 28e:	80 93 00 02 	sts	0x0200, r24
 	pinSetup();
+<<<<<<< HEAD
  22e:	c3 df       	rcall	.-122    	; 0x1b6 <pinSetup>
 	initialize();
  230:	d5 df       	rcall	.-86     	; 0x1dc <initialize>
@@ -369,8 +604,111 @@ int main(void){
 	pinSetup();
 	initialize();
 	//sei();
+=======
+ 292:	a7 df       	rcall	.-178    	; 0x1e2 <pinSetup>
+	sei();//enable global interrupt
+ 294:	78 94       	sei
+	motorObjectSetup(M0);
+ 296:	80 91 00 02 	lds	r24, 0x0200
+ 29a:	90 91 01 02 	lds	r25, 0x0201
+ 29e:	8f df       	rcall	.-226    	; 0x1be <motorObjectSetup>
+	initialize();
+ 2a0:	b8 df       	rcall	.-144    	; 0x212 <initialize>
+	//test start
+	PORTB = (1<<PB7);
+ 2a2:	80 e8       	ldi	r24, 0x80	; 128
+ 2a4:	85 b9       	out	0x05, r24	; 5
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 2a6:	2f ef       	ldi	r18, 0xFF	; 255
+ 2a8:	33 ec       	ldi	r19, 0xC3	; 195
+ 2aa:	99 e0       	ldi	r25, 0x09	; 9
+ 2ac:	21 50       	subi	r18, 0x01	; 1
+ 2ae:	30 40       	sbci	r19, 0x00	; 0
+ 2b0:	90 40       	sbci	r25, 0x00	; 0
+ 2b2:	e1 f7       	brne	.-8      	; 0x2ac <main+0x3a>
+ 2b4:	00 c0       	rjmp	.+0      	; 0x2b6 <main+0x44>
+ 2b6:	00 00       	nop
+	_delay_ms(200);
+	PORTB = (0<<PB7);
+ 2b8:	15 b8       	out	0x05, r1	; 5
+ 2ba:	ef ef       	ldi	r30, 0xFF	; 255
+ 2bc:	f3 ec       	ldi	r31, 0xC3	; 195
+ 2be:	29 e0       	ldi	r18, 0x09	; 9
+ 2c0:	e1 50       	subi	r30, 0x01	; 1
+ 2c2:	f0 40       	sbci	r31, 0x00	; 0
+ 2c4:	20 40       	sbci	r18, 0x00	; 0
+ 2c6:	e1 f7       	brne	.-8      	; 0x2c0 <main+0x4e>
+ 2c8:	00 c0       	rjmp	.+0      	; 0x2ca <main+0x58>
+ 2ca:	00 00       	nop
+	_delay_ms(200);
+	PORTB = (1<<PB7);
+ 2cc:	85 b9       	out	0x05, r24	; 5
+ 2ce:	3f ef       	ldi	r19, 0xFF	; 255
+ 2d0:	83 ec       	ldi	r24, 0xC3	; 195
+ 2d2:	99 e0       	ldi	r25, 0x09	; 9
+ 2d4:	31 50       	subi	r19, 0x01	; 1
+ 2d6:	80 40       	sbci	r24, 0x00	; 0
+ 2d8:	90 40       	sbci	r25, 0x00	; 0
+ 2da:	e1 f7       	brne	.-8      	; 0x2d4 <main+0x62>
+ 2dc:	00 c0       	rjmp	.+0      	; 0x2de <main+0x6c>
+ 2de:	00 00       	nop
+	_delay_ms(200);
+	PORTB = (0<<PB7);
+ 2e0:	15 b8       	out	0x05, r1	; 5
+ 2e2:	ef ef       	ldi	r30, 0xFF	; 255
+ 2e4:	f3 ec       	ldi	r31, 0xC3	; 195
+ 2e6:	29 e0       	ldi	r18, 0x09	; 9
+ 2e8:	e1 50       	subi	r30, 0x01	; 1
+ 2ea:	f0 40       	sbci	r31, 0x00	; 0
+ 2ec:	20 40       	sbci	r18, 0x00	; 0
+ 2ee:	e1 f7       	brne	.-8      	; 0x2e8 <main+0x76>
+ 2f0:	00 c0       	rjmp	.+0      	; 0x2f2 <main+0x80>
+ 2f2:	00 00       	nop
+>>>>>>> c1d778d9278ba6bb1e03f0d0267254f1260e6b08
 	while(1){
+		
+		M0->directionToRotate=LEFT;
 		pollMotor(M0);
+		_delay_ms(500);
+		M0->directionToRotate=RIGHT;
+ 2f4:	01 e0       	ldi	r16, 0x01	; 1
+ 2f6:	10 e0       	ldi	r17, 0x00	; 0
+	PORTB = (0<<PB7);
+	_delay_ms(200);
+	//test end
+	while(1){
+		
+		M0->directionToRotate=LEFT;
+ 2f8:	80 91 00 02 	lds	r24, 0x0200
+ 2fc:	90 91 01 02 	lds	r25, 0x0201
+ 300:	fc 01       	movw	r30, r24
+ 302:	17 86       	std	Z+15, r1	; 0x0f
+ 304:	16 86       	std	Z+14, r1	; 0x0e
+		pollMotor(M0);
+ 306:	8a df       	rcall	.-236    	; 0x21c <pollMotor>
+ 308:	ff ef       	ldi	r31, 0xFF	; 255
+ 30a:	29 e6       	ldi	r18, 0x69	; 105
+ 30c:	38 e1       	ldi	r19, 0x18	; 24
+ 30e:	f1 50       	subi	r31, 0x01	; 1
+ 310:	20 40       	sbci	r18, 0x00	; 0
+ 312:	30 40       	sbci	r19, 0x00	; 0
+ 314:	e1 f7       	brne	.-8      	; 0x30e <main+0x9c>
+ 316:	00 c0       	rjmp	.+0      	; 0x318 <main+0xa6>
+ 318:	00 00       	nop
+		_delay_ms(500);
+		M0->directionToRotate=RIGHT;
+ 31a:	80 91 00 02 	lds	r24, 0x0200
+ 31e:	90 91 01 02 	lds	r25, 0x0201
+ 322:	fc 01       	movw	r30, r24
+ 324:	17 87       	std	Z+15, r17	; 0x0f
+ 326:	06 87       	std	Z+14, r16	; 0x0e
+		pollMotor(M0);
+<<<<<<< HEAD
  234:	80 91 00 02 	lds	r24, 0x0200
  238:	90 91 01 02 	lds	r25, 0x0201
  23c:	d6 df       	rcall	.-84     	; 0x1ea <pollMotor>
@@ -383,3 +721,22 @@ int main(void){
 
 00000244 <__stop_program>:
  244:	ff cf       	rjmp	.-2      	; 0x244 <__stop_program>
+=======
+ 328:	79 df       	rcall	.-270    	; 0x21c <pollMotor>
+ 32a:	ff ef       	ldi	r31, 0xFF	; 255
+ 32c:	29 e6       	ldi	r18, 0x69	; 105
+ 32e:	38 e1       	ldi	r19, 0x18	; 24
+ 330:	f1 50       	subi	r31, 0x01	; 1
+ 332:	20 40       	sbci	r18, 0x00	; 0
+ 334:	30 40       	sbci	r19, 0x00	; 0
+ 336:	e1 f7       	brne	.-8      	; 0x330 <main+0xbe>
+ 338:	00 c0       	rjmp	.+0      	; 0x33a <main+0xc8>
+ 33a:	00 00       	nop
+ 33c:	dd cf       	rjmp	.-70     	; 0x2f8 <main+0x86>
+
+0000033e <_exit>:
+ 33e:	f8 94       	cli
+
+00000340 <__stop_program>:
+ 340:	ff cf       	rjmp	.-2      	; 0x340 <__stop_program>
+>>>>>>> c1d778d9278ba6bb1e03f0d0267254f1260e6b08
