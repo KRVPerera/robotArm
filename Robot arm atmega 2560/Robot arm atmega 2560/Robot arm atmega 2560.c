@@ -189,7 +189,6 @@ void checkHomeSwiches(struct Motor *motor){
 //main poll function
 //only for testing M0
 void pollMotor(struct Motor *motor){
-	PORTB = (1<<PB7);//test led
 	//run stop motor
 	if(motor->running == TRUE){
 		RUNPORTB = (TRUE<<RUNM0);
