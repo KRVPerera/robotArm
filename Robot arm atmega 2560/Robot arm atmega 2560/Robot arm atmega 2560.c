@@ -84,9 +84,10 @@ int main(void){
 	motorObjectSetup(M0);
 	pinSetup();
 	initialize();
-	sei();
+	//sei();
 	while(1){
 		pollMotor(M0);
+		PORTB = (1<<PB7);
 	}
 	return 0;
 	
