@@ -7,12 +7,14 @@
 
 
 
-#define  F_CPU 16000000
+#define F_CPU 16000000UL
 
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdio.h>
 #include <avr/interrupt.h>
+
+/*CONVENTIONS*/
 
 #define  numMotors 7//number of motors//Assumed as right
 #define LEFT 0//left direction of the motor
@@ -23,15 +25,15 @@
 #define FALSE 0
 #define SWITCHE_PRESSED 0//define the state of the pin when the switch is pressed
 
-/*Define the pins used*/
+/*PINS*/
 
-//define the the pins connected to the switch of each motor below
+//SWITCH:	define the the pins connected to the switch of each motor below
 #define SWITCH_DDR DDRJ
 #define SWITCH_PORT PORTJ
 #define SWM0 PJ0 //PCINT9
-//define the interrupt pins which are connected to encoder pin A of each motor below
-#define ENCAM0 PD1//connected to INT0
-//define the general I/O pins which are connected to encoder pin B of each motor below
+//ENCODER_PIN_A:	interrupt pins which are connected to encoder pin A of each motor below
+#define ENCAM0 PD0//connected to INT0
+//ENCODER_PIN_B:	define the general I/O pins which are connected to encoder pin B of each motor below
 #define ENCBM0 PA0
 
 /*DEFINE THE CONTROL PINS*/
@@ -81,17 +83,27 @@ int main(void){
 	struct Motor MtestM;
 	M0 = &MtestM;
 	pinSetup();
+	sei();//enable global interrupt
 	motorObjectSetup(M0);
 	initialize();
-	sei();
+	//test start
+	PORTB = (1<<PB7);
+	_delay_ms(200);
+	PORTB = (0<<PB7);
+	_delay_ms(200);
+	PORTB = (1<<PB7);
+	_delay_ms(200);
+	PORTB = (0<<PB7);
+	_delay_ms(200);
+	//test end
 	while(1){
+		
+		M0->directionToRotate=LEFT;
 		pollMotor(M0);
-		M0->directionToRotate = LEFT;
+		_delay_ms(500);
+		M0->directionToRotate=RIGHT;
 		pollMotor(M0);
-		_delay_ms(1000);
-		M0->directionToRotate = RIGHT;
-		pollMotor(M0);
-		_delay_ms(1000);
+		_delay_ms(500);
 	
 	}
 	return 0;
@@ -113,24 +125,44 @@ void setENCB(struct Motor *motor){
 //this is activated when a rising edge is detected by ENCA of the motor
 //this function is written for Motor0 and you should write a dedicated function for
 //each motor
-
 ISR(INT0_vect){
-	
+	cli();
+	/*
 	if(M0->ENCB == TRUE){
-		M0->relativeRevolutions ++;
-		M0->direction = RISEnHIGHDIR;
+		M0->relativeRevolutions++;
+		//M0->direction = RISEnHIGHDIR;
+		
 	}
 	else{//put elseif
-		M0->relativeRevolutions --;
+		M0->relativeRevolutions--;
+		M0->direction = RISEnLOWDIR;
+	}*/
+	
+	//_delay_ms(5);
+	if((PINA&0x1)==0x1){
+		M0->relativeRevolutions++;
+		M0->direction = RISEnHIGHDIR;
+		
+	}
+	else{//put elseif
+		M0->relativeRevolutions--;
 		M0->direction = RISEnLOWDIR;
 	}
+	sei();
 }
 //CHECK HOME SWITCH
 //this function detects the state changes of home switch
 //when ever pin change is detected it resets the relative position to 0
-ISR(PCINT0_vect){
+ISR(PCINT1_vect){
+	cli();
 	//toggle the state of home switch state
-	(M0->HomeSwitchState == TRUE)? (M0->HomeSwitchState = FALSE):(M0->HomeSwitchState =TRUE);
+	if(M0->HomeSwitchState == TRUE){
+		M0->HomeSwitchState = FALSE;
+	}
+	else{
+		M0->HomeSwitchState =TRUE;
+	}
+	sei();
 }
 
 /*
@@ -147,8 +179,8 @@ void stopAtHome(struct Motor *motor){
 	void motorObjectSetup(struct Motor *motor){
 	motor->running = TRUE;
 	motor->directionToRotate = LEFT;
-	motor->maxRevolutionsLeft = -100;
-	motor->maxRevolutionsRight = 100;
+	motor->maxRevolutionsLeft = -1000;
+	motor->maxRevolutionsRight = 1000;
 	motor->relativeRevolutions = 0;
 
 }
@@ -157,6 +189,7 @@ void pinSetup(){
 	DDRJ = 0x0;//PCINT for switches
 	DDRD = 0x1E;//INT for Encoder-A
 	DDRE = 0xF0;//INT for Encoder-A
+	DDRA = 0;
 	
 	//temp code
 	DDRB = 0xFF;//PWM and Direction controlling
@@ -196,28 +229,33 @@ void pollMotor(struct Motor *motor){
 	//run stop motor
 	if(motor->running == TRUE){
 		RUNPORTB = (TRUE<<RUNM0);
-
 	}
 	else{
 		RUNPORTB = (FALSE<<RUNM0);
 	}
 	//change the rotating direction
 	if(motor->directionToRotate == RIGHT){//rotate right
-		//DIRECTIONPORT = (RIGH<<DIRM0)|(DIRECTIONPORT);
-		PORTB = (1<<PB0)|(PORTB);
+		DIRECTIONPORT = (RIGHT<<DIRM0)|(DIRECTIONPORT);
+		//PORTB = (1<<PB0)|(PORTB);
 	}
 	else if(motor->directionToRotate == LEFT){//rotate left
-		//DIRECTIONPORT = (LEFT<<DIRM0)|(DIRECTIONPORT);
-		PORTB = (0<<PB0)|(PORTB);
+		DIRECTIONPORT = (LEFT<<DIRM0)|(DIRECTIONPORT);
+		//PORTB = (0<<PB0)|(PORTB);
 	}
 	//stop the motor if limits reached
-	if((motor->relativeRevolutions>= motor->maxRevolutionsRight)||(motor->relativeRevolutions<=motor->maxRevolutionsLeft)){
+	if(((motor->relativeRevolutions)>= (motor->maxRevolutionsRight))||((motor->relativeRevolutions)<=(motor->maxRevolutionsLeft))){
 		motor->running = FALSE;
-		PORTB = (1<<PB7)|(PORTB);//test
-		_delay_ms(200);
-		PORTB = (0<<PB7)|(PORTB);
-		_delay_ms(200);//test
 	}
+	//test check the switch
+	if(motor->HomeSwitchState == SWITCHE_PRESSED){//test
+		PORTB = ((1<<PB7)|(PORTB));
+		//_delay_ms(500);
+	}
+	else{
+		PORTB = ((0<<PB7)|(PORTB));
+		//_delay_ms(500);
+	}
+	//switch test ends here
 	
 }
 
