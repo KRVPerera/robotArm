@@ -257,5 +257,6 @@ void pollMotor(struct Motor *motor){
 	}
 	//switch test ends here
 
+
 }
 
