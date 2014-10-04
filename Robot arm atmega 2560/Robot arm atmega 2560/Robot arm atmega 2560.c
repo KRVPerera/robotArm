@@ -139,13 +139,13 @@ void stopAtHome(struct Motor *motor){
 
 /*INITIALIZING*/
 	void motorObjectSetup(struct Motor *motor){
-	struct Motor tempMotor;
-	tempMotor.running = 1;
-	tempMotor.directionToRotate = LEFT;
-	tempMotor.maxRevolutionsLeft = -100;
-	tempMotor.maxRevolutionsRight = 100;
-	tempMotor.relativeRevolutions = 0;
-	motor = &tempMotor;
+	struct Motor *tempMotor = malloc(sizeof(struct Motor));
+	tempMotor->running = 1;
+	tempMotor->directionToRotate = LEFT;
+	tempMotor->maxRevolutionsLeft = -100;
+	tempMotor->maxRevolutionsRight = 100;
+	tempMotor->relativeRevolutions = 0;
+	motor = tempMotor;
 
 }
 

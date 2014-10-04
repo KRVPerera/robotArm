@@ -42,7 +42,7 @@
     <com_atmel_avrdbg_tool_jtagicemkii>
       <ToolType>com.atmel.avrdbg.tool.jtagicemkii</ToolType>
       <ToolName>JTAGICE mkII</ToolName>
-      <ToolNumber>00A000405440</ToolNumber>
+      <ToolNumber>00A000405453</ToolNumber>
       <StimuliFile>
       </StimuliFile>
       <Channel>
