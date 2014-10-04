@@ -15,9 +15,6 @@ Discarded input sections
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr6/crtm2560.o
  .text          0x00000000        0x0 Robot arm atmega 2560.o
  .bss           0x00000000        0x0 Robot arm atmega 2560.o
- .text.setENCB  0x00000000        0x8 Robot arm atmega 2560.o
- .text.stopAtHome
-                0x00000000       0x12 Robot arm atmega 2560.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr6\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr6\libgcc.a(_exit.o)
  .text.libgcc.mul
@@ -159,7 +156,7 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x342
+.text           0x00000000      0x2de
  *(.vectors)
  .vectors       0x00000000       0xe4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr6/crtm2560.o
                 0x00000000                __vector_default
@@ -289,15 +286,17 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8
                 0x00000212        0xa Robot arm atmega 2560.o
                 0x00000212                initialize
  .text.pollMotor
-                0x0000021c       0x56 Robot arm atmega 2560.o
+                0x0000021c       0x46 Robot arm atmega 2560.o
                 0x0000021c                pollMotor
- .text.main     0x00000272       0xcc Robot arm atmega 2560.o
-                0x00000272                main
-                0x0000033e                . = ALIGN (0x2)
+ .text.testNow  0x00000262       0x3a Robot arm atmega 2560.o
+                0x00000262                testNow
+ .text.main     0x0000029c       0x3e Robot arm atmega 2560.o
+                0x0000029c                main
+                0x000002da                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000033e        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr6\libgcc.a(_exit.o)
-                0x0000033e                _exit
-                0x0000033e                exit
+ .fini9         0x000002da        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr6\libgcc.a(_exit.o)
+                0x000002da                _exit
+                0x000002da                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -316,11 +315,11 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000033e        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr6\libgcc.a(_exit.o)
+ .fini0         0x000002da        0x4 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr6\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000342                _etext = .
+                0x000002de                _etext = .
 
-.data           0x00800200        0x0 load address 0x00000342
+.data           0x00800200        0x0 load address 0x000002de
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800200        0x0 c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr6/crtm2560.o
@@ -343,8 +342,8 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8
  COMMON         0x00800200        0x2 Robot arm atmega 2560.o
                 0x00800200                M0
                 0x00800202                PROVIDE (__bss_end, .)
-                0x00000342                __data_load_start = LOADADDR (.data)
-                0x00000342                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000002de                __data_load_start = LOADADDR (.data)
+                0x000002de                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800202        0x0
                 0x00800202                PROVIDE (__noinit_start, .)
@@ -409,35 +408,35 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0x68
+.debug_aranges  0x00000000       0x60
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x68 Robot arm atmega 2560.o
+                0x00000000       0x60 Robot arm atmega 2560.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x488
+.debug_info     0x00000000      0x351
  *(.debug_info)
- .debug_info    0x00000000      0x488 Robot arm atmega 2560.o
+ .debug_info    0x00000000      0x351 Robot arm atmega 2560.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev   0x00000000      0x1a4
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x1a4 Robot arm atmega 2560.o
 
-.debug_line     0x00000000      0x3e4
+.debug_line     0x00000000      0x35b
  *(.debug_line)
- .debug_line    0x00000000      0x3e4 Robot arm atmega 2560.o
+ .debug_line    0x00000000      0x35b Robot arm atmega 2560.o
 
-.debug_frame    0x00000000      0x104
+.debug_frame    0x00000000       0xf4
  *(.debug_frame)
- .debug_frame   0x00000000      0x104 Robot arm atmega 2560.o
+ .debug_frame   0x00000000       0xf4 Robot arm atmega 2560.o
 
-.debug_str      0x00000000      0x225
+.debug_str      0x00000000      0x21f
  *(.debug_str)
- .debug_str     0x00000000      0x225 Robot arm atmega 2560.o
-                                0x269 (size before relaxing)
+ .debug_str     0x00000000      0x21f Robot arm atmega 2560.o
+                                0x25e (size before relaxing)
 
 .debug_loc      0x00000000      0x15d
  *(.debug_loc)
@@ -449,9 +448,9 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x58
+.debug_ranges   0x00000000       0x50
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x58 Robot arm atmega 2560.o
+ .debug_ranges  0x00000000       0x50 Robot arm atmega 2560.o
 
 .debug_macro
  *(.debug_macro)
