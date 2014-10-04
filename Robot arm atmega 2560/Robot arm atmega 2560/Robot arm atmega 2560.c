@@ -15,10 +15,10 @@
 #include <avr/interrupt.h>
 
 #define  numMotors 7//number of motors//Assumed as right
-#define RISEnLOWDIR -1//direction of the motor when ENCA is a rising edge//ENCB is low, Assumed as left
-#define RISEnHIGHDIR 1//direction of the motor when ENCA is a rising edge//ENCB is high, positive direction, Assumes as RIGHT
-#define RIGHT 1//right direction of the motor
 #define LEFT 0//left direction of the motor
+#define RIGHT 1//right direction of the motor
+#define RISEnLOWDIR 0//direction of the motor when ENCA is a rising edge//ENCB is low, Assumed as left
+#define RISEnHIGHDIR 1//direction of the motor when ENCA is a rising edge//ENCB is high, positive direction, Assumes as RIGHT
 #define TRUE 1
 #define FALSE 0
 #define SWITCHE_PRESSED 0//define the state of the pin when the switch is pressed
@@ -59,7 +59,6 @@ struct Motor{
 	int directionToRotate;//set the direction the motor should rotate
 };
 
-
 struct Motor *M0;
 
 //initializing functions
@@ -73,20 +72,27 @@ void initialize();
 //check functions
 void pollMotor(struct Motor *motor);
 void setENCB(struct Motor *motor);
-void setMotorDirection();
 
 //commands
 void stopAtHome();//stops the motors if they are in home position
 void rotateRight();
 
 int main(void){
-	
-	motorObjectSetup(M0);
+	struct Motor MtestM;
+	M0 = &MtestM;
 	pinSetup();
+	motorObjectSetup(M0);
 	initialize();
 	sei();
 	while(1){
 		pollMotor(M0);
+		M0->directionToRotate = LEFT;
+		pollMotor(M0);
+		_delay_ms(1000);
+		M0->directionToRotate = RIGHT;
+		pollMotor(M0);
+		_delay_ms(1000);
+	
 	}
 	return 0;
 	
@@ -139,13 +145,11 @@ void stopAtHome(struct Motor *motor){
 
 /*INITIALIZING*/
 	void motorObjectSetup(struct Motor *motor){
-	struct Motor *tempMotor = malloc(sizeof(struct Motor));
-	tempMotor->running = 1;
-	tempMotor->directionToRotate = LEFT;
-	tempMotor->maxRevolutionsLeft = -100;
-	tempMotor->maxRevolutionsRight = 100;
-	tempMotor->relativeRevolutions = 0;
-	motor = tempMotor;
+	motor->running = TRUE;
+	motor->directionToRotate = LEFT;
+	motor->maxRevolutionsLeft = -100;
+	motor->maxRevolutionsRight = 100;
+	motor->relativeRevolutions = 0;
 
 }
 
@@ -192,20 +196,27 @@ void pollMotor(struct Motor *motor){
 	//run stop motor
 	if(motor->running == TRUE){
 		RUNPORTB = (TRUE<<RUNM0);
+
 	}
 	else{
 		RUNPORTB = (FALSE<<RUNM0);
 	}
-	//chnange the rotating direction
+	//change the rotating direction
 	if(motor->directionToRotate == RIGHT){//rotate right
-		DIRECTIONPORT = (RIGHT<<DIRM0);
+		//DIRECTIONPORT = (RIGH<<DIRM0)|(DIRECTIONPORT);
+		PORTB = (1<<PB0)|(PORTB);
 	}
-	else{//rotate left
-		DIRECTIONPORT = (LEFT<<ENCBM0);
+	else if(motor->directionToRotate == LEFT){//rotate left
+		//DIRECTIONPORT = (LEFT<<DIRM0)|(DIRECTIONPORT);
+		PORTB = (0<<PB0)|(PORTB);
 	}
 	//stop the motor if limits reached
 	if((motor->relativeRevolutions>= motor->maxRevolutionsRight)||(motor->relativeRevolutions<=motor->maxRevolutionsLeft)){
 		motor->running = FALSE;
+		PORTB = (1<<PB7)|(PORTB);//test
+		_delay_ms(200);
+		PORTB = (0<<PB7)|(PORTB);
+		_delay_ms(200);//test
 	}
 	
 }
