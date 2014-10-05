@@ -425,9 +425,9 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x1a4 Robot arm atmega 2560.o
 
-.debug_line     0x00000000      0x3a0
+.debug_line     0x00000000      0x3a5
  *(.debug_line)
- .debug_line    0x00000000      0x3a0 Robot arm atmega 2560.o
+ .debug_line    0x00000000      0x3a5 Robot arm atmega 2560.o
 
 .debug_frame    0x00000000       0xf4
  *(.debug_frame)

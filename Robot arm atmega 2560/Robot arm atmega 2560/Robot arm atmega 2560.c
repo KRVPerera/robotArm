@@ -24,7 +24,7 @@ of a Motor.
 *Poll function then make the decision by looking at each Motor structure
 */
 
-
+void testNow();//Testing purposes
 int main(void){
 	struct Motor MtestM;
 	M0 = &MtestM;
@@ -39,6 +39,15 @@ int main(void){
 	}
 	return 0;
 	
+}
+void testNow(){
+	PORTB = ((1<<PB7)|(PORTB));
+	_delay_ms(500);
+	PORTB = ((0<<PB7)|(PORTB));
+	_delay_ms(500);
+	
+	M0->targetDirection = LEFT;
+	pollMotor(M0);
 }
 
 

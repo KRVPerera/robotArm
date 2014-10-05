@@ -22,7 +22,6 @@ void initialize();//Checks state of all Motors before executing the program.
 void checkHomeSwiches(struct Motor *motor);//check the state of the position indicating switch of the motor.
 void pollMotor(struct Motor *motor);//THE LOGIC IS HERE. Checks all the Motors and decide what to do.
 
-void testNow();//Testing purposes
 
 /*
 *Motor 0:Encoder pin A:Rising Edge Detecting Function
@@ -127,14 +126,4 @@ void pollMotor(struct Motor *motor){
 	if(!((motor->relativeRevolutions)-(motor->targetPosition))){
 		motor->running = FALSE;
 	}
-}
-
-void testNow(){
-	PORTB = ((1<<PB7)|(PORTB));
-	_delay_ms(500);
-	PORTB = ((0<<PB7)|(PORTB));
-	_delay_ms(500);
-	
-	M0->targetDirection = LEFT;
-	pollMotor(M0);	
 }
