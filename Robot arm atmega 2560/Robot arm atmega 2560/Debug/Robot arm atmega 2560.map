@@ -267,27 +267,27 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8
                 0x00000108                __vector_42
                 0x0000010a                . = ALIGN (0x2)
  *(.text.*)
- .text.__vector_1
-                0x0000010a       0x66 Robot arm atmega 2560.o
-                0x0000010a                __vector_1
- .text.__vector_10
-                0x00000170       0x4e Robot arm atmega 2560.o
-                0x00000170                __vector_10
  .text.motorObjectSetup
-                0x000001be       0x2c Robot arm atmega 2560.o
-                0x000001be                motorObjectSetup
+                0x0000010a       0x2c Robot arm atmega 2560.o
+                0x0000010a                motorObjectSetup
  .text.pinSetup
-                0x000001ea       0x28 Robot arm atmega 2560.o
-                0x000001ea                pinSetup
+                0x00000136       0x28 Robot arm atmega 2560.o
+                0x00000136                pinSetup
  .text.checkHomeSwiches
-                0x00000212        0x8 Robot arm atmega 2560.o
-                0x00000212                checkHomeSwiches
+                0x0000015e        0x8 Robot arm atmega 2560.o
+                0x0000015e                checkHomeSwiches
  .text.initialize
-                0x0000021a        0xa Robot arm atmega 2560.o
-                0x0000021a                initialize
+                0x00000166        0xa Robot arm atmega 2560.o
+                0x00000166                initialize
  .text.pollMotor
-                0x00000224       0x54 Robot arm atmega 2560.o
-                0x00000224                pollMotor
+                0x00000170       0x54 Robot arm atmega 2560.o
+                0x00000170                pollMotor
+ .text.__vector_1
+                0x000001c4       0x66 Robot arm atmega 2560.o
+                0x000001c4                __vector_1
+ .text.__vector_10
+                0x0000022a       0x4e Robot arm atmega 2560.o
+                0x0000022a                __vector_10
  .text.testNow  0x00000278       0x3a Robot arm atmega 2560.o
                 0x00000278                testNow
  .text.main     0x000002b2       0x3e Robot arm atmega 2560.o
@@ -425,9 +425,9 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.939/avr8
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x1a4 Robot arm atmega 2560.o
 
-.debug_line     0x00000000      0x3a5
+.debug_line     0x00000000      0x3c4
  *(.debug_line)
- .debug_line    0x00000000      0x3a5 Robot arm atmega 2560.o
+ .debug_line    0x00000000      0x3c4 Robot arm atmega 2560.o
 
 .debug_frame    0x00000000       0xf4
  *(.debug_frame)

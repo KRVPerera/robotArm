@@ -15,6 +15,7 @@
 #include "Motor.h"
 #include "MotorDeclaration.h"
 #include "MotorFunctions.h"
+#include "InterruptServiceRoutunes.h"
 
 /* THE LOGIC
 *The Motor structure defines the attributes

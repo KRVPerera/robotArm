@@ -22,43 +22,6 @@ void initialize();//Checks state of all Motors before executing the program.
 void checkHomeSwiches(struct Motor *motor);//check the state of the position indicating switch of the motor.
 void pollMotor(struct Motor *motor);//THE LOGIC IS HERE. Checks all the Motors and decide what to do.
 
-
-/*
-*Motor 0:Encoder pin A:Rising Edge Detecting Function
-*Counts encoder ticks
-*Updates the direction of the Motor
-*/
-ISR(ENCAM0_EINTVECT){
-	cli();
-	if((ENCB_PIN&0x1)==0x1){
-		M0->relativeRevolutions++;
-		M0->direction = RISEnHIGHDIR;
-		
-	}
-	else{
-		M0->relativeRevolutions--;
-		M0->direction = RISEnLOWDIR;
-	}
-	sei();
-}
-
-/*
-*Motor 0:Home Switch state:Pin Change Detecting Function
-*Toggles the  homeSwitchState attribute of the motor
-*/
-ISR(SWM0_PCINTVECT){
-	cli();
-	//toggle the state of home switch state
-	if(M0->HomeSwitchState == TRUE){
-		M0->HomeSwitchState = FALSE;
-	}
-	else{
-		M0->HomeSwitchState =TRUE;
-	}
-	sei();
-}
-
-
 void motorObjectSetup(struct Motor *motor){
 	motor->running = TRUE;
 	motor->targetDirection = LEFT;
