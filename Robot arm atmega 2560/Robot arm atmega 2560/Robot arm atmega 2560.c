@@ -71,7 +71,8 @@ struct Motor{
 	int maxRevolutionsRight;//Right safety limit
 	int maxRevolutionsLeft;//Left safety limit
 	int ENCB;//TRUE if high
-	int directionToRotate;//target direction to rotate
+	int targetDirection;//target direction to rotate
+	int targetPosition;//target position to stop
 };
 
 struct Motor *M0;
@@ -139,10 +140,11 @@ ISR(SWM0_PCINTVECT){
 
 void motorObjectSetup(struct Motor *motor){
 	motor->running = TRUE;
-	motor->directionToRotate = LEFT;
+	motor->targetDirection = LEFT;
 	motor->maxRevolutionsLeft = -1000;
 	motor->maxRevolutionsRight = 1000;
 	motor->relativeRevolutions = 0;
+	motor->targetPosition = -300;
 
 }
 
@@ -189,18 +191,20 @@ void pollMotor(struct Motor *motor){
 		ENABLE_PORT1 = (FALSE<<ENM0);
 	}
 	//change the rotating direction
-	if(motor->directionToRotate == RIGHT){//rotate right
+	if(motor->targetDirection == RIGHT){//rotate right
 		DIRECTION_PORT = (RIGHT<<DIRM0)|(DIRECTION_PORT);
 	}
-	else if(motor->directionToRotate == LEFT){//rotate left
+	else if(motor->targetDirection == LEFT){//rotate left
 		DIRECTION_PORT = (LEFT<<DIRM0)|(DIRECTION_PORT);
 	}
 	//stop the motor if safety limits reached
 	if(((motor->relativeRevolutions)>= (motor->maxRevolutionsRight))||((motor->relativeRevolutions)<=(motor->maxRevolutionsLeft))){
 		motor->running = FALSE;
 	}
-
-	
+	//stop at target position
+	if(!((motor->relativeRevolutions)-(motor->targetPosition))){
+		motor->running = FALSE;
+	}
 }
 
 void testNow(){
@@ -209,7 +213,7 @@ void testNow(){
 	PORTB = ((0<<PB7)|(PORTB));
 	_delay_ms(500);
 	
-	M0->directionToRotate = LEFT;
+	M0->targetDirection = LEFT;
 	pollMotor(M0);	
 }
 
