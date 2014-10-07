@@ -9,13 +9,14 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <stdio.h>
- 
+
 #include "ConvensionDefine.h"//file including order is important
 #include "PinDefine.h"
 #include "Motor.h"
 #include "MotorDeclaration.h"
 #include "MotorFunctions.h"
 #include "InterruptServiceRoutunes.h"
+
 
 /* THE LOGIC
 *The Motor structure defines the attributes
@@ -25,31 +26,43 @@ of a Motor.
 *Poll function then make the decision by looking at each Motor structure
 */
 
-void testNow();//Testing purposes
 int main(void){
 	struct Motor MtestM;
 	M0 = &MtestM;
+	cli();
 	pinSetup();
 	initialize();
 	motorObjectSetup(M0);
-	sei();//enable global interrupt
-	testNow();
+	M0->maxRevolutionsRight=50;
+	M0->maxRevolutionsLeft = -50;
+	M0->targetDirection = LEFT;
+	M0->running = TRUE;
+ 	pollMotor(M0);
+	 /*
+  	PORTB |=(1<<PB7);
+  	_delay_ms(500);
+  	PORTB &= ~(1<<PB7);
+  	_delay_ms(500);
+  	PORTB |= (1<<PB7);
+  	_delay_ms(500);
+  	PORTB &= ~(1<<PB7);
+  	_delay_ms(500);
+	  */
+	  sei();
+	
+
+	
 	while(1){
 		pollMotor(M0);
-	
+
 	}
 	return 0;
 	
 }
-void testNow(){
-	PORTB = ((1<<PB7)|(PORTB));
-	_delay_ms(500);
-	PORTB = ((0<<PB7)|(PORTB));
-	_delay_ms(500);
-	
-	M0->targetDirection = LEFT;
-	pollMotor(M0);
-}
+
+
+
+
 
 
 

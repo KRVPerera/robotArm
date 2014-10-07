@@ -24,9 +24,9 @@ void pollMotor(struct Motor *motor);//THE LOGIC IS HERE. Checks all the Motors a
 
 void motorObjectSetup(struct Motor *motor){
 	motor->running = TRUE;
-	motor->targetDirection = LEFT;
-	motor->maxRevolutionsLeft = -1000;
-	motor->maxRevolutionsRight = 1000;
+	motor->targetDirection = RIGHT;
+	motor->maxRevolutionsLeft = -50;
+	motor->maxRevolutionsRight = 50;
 	motor->relativeRevolutions = 0;
 	motor->targetPosition = -300;
 
@@ -34,8 +34,8 @@ void motorObjectSetup(struct Motor *motor){
 
 void pinSetup(){
 	DDRJ = 0x0;//PCINT for switches
-	DDRD = 0x1E;//INT for Encoder-A
-	DDRE = 0xF0;//INT for Encoder-A
+	//DDRD = 0x1E;//INT for Encoder-A
+	//DDRE = 0xF0;//INT for Encoder-A
 	DDRA = 0;
 	
 	//temp code
@@ -45,9 +45,10 @@ void pinSetup(){
 	
 	
 	//Setup external interrupts
-	EIMSK = 0xFF;//Enabling interrupts 7:0
+	EIMSK = 0x01;//Enabling interrupts 7:0
 	EICRA = 0xFF;//Enabling Rising edge interrupts for INT 3:0
 	EICRB = 0xFF;//Enabling Rising edge interrupts for INT 7:4
+	
 	//setup pin change interrupts
 	PCMSK1 = 0xFF;//Enabling PCinterrupts 15:8, but we want only 15:9/J6:J0
 	PCICR = (1<<PCIE1);//Enabling PCinterrupts 15:8, but we want only 15:9/J6:J0 
@@ -69,24 +70,24 @@ void checkHomeSwiches(struct Motor *motor){
 void pollMotor(struct Motor *motor){
 	//run/stop motor
 	if(motor->running == TRUE){
-		ENABLE_PORT1 = (TRUE<<ENM0);
+		ENABLE_PORT1 |= (TRUE<<ENM0);
 	}
 	else{
-		ENABLE_PORT1 = (FALSE<<ENM0);
+		ENABLE_PORT1 &= ~(TRUE<<ENM0);
 	}
 	//change the rotating direction
 	if(motor->targetDirection == RIGHT){//rotate right
-		DIRECTION_PORT = (RIGHT<<DIRM0)|(DIRECTION_PORT);
+		DIRECTION_PORT |= (RIGHT<<DIRM0);
 	}
 	else if(motor->targetDirection == LEFT){//rotate left
-		DIRECTION_PORT = (LEFT<<DIRM0)|(DIRECTION_PORT);
+		DIRECTION_PORT &= ~(RIGHT<<DIRM0);
 	}
 	//stop the motor if safety limits reached
 	if(((motor->relativeRevolutions)>= (motor->maxRevolutionsRight))||((motor->relativeRevolutions)<=(motor->maxRevolutionsLeft))){
 		motor->running = FALSE;
 	}
 	//stop at target position
-	if(!((motor->relativeRevolutions)-(motor->targetPosition))){
-		motor->running = FALSE;
-	}
+// 	if(!((motor->relativeRevolutions)-(motor->targetPosition))){
+// 		motor->running = FALSE;
+	//}
 }
