@@ -17,6 +17,7 @@
 *Counts encoder ticks
 *Updates the direction of the Motor
 */
+
 ISR(ENCAM0_EINTVECT){
 	cli();
 	if((ENCB_PIN&0x1)==0x1){
