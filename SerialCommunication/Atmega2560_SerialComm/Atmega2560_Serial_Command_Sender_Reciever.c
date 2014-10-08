@@ -69,7 +69,7 @@ char USART_recieve(){
 void recieve_command(){
 	for( i = 0 ; i < 3 ; i++){
 		COMMAND[i]=USART_recieve();
-		if(COMMAND[i] == 'X'){
+		if((COMMAND[i] == 'X') ||(COMMAND[i] == 'x') ){
 			break;
 		}
 	}
