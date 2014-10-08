@@ -87,7 +87,7 @@ namespace RobotInteractive_Windows
             }
 
             string text = PortMessage.Text;
-            text = text.Remove('\r','\n');
+            text = text.Remove(text.Length-1,1);
             ConnectedPort.WriteLine(text);
             char a = (char)ConnectedPort.ReadChar();
             char b = (char)ConnectedPort.ReadChar();
@@ -109,6 +109,11 @@ namespace RobotInteractive_Windows
            int c = ConnectedPort.ReadChar();
            PortRecieve.Text = c.ToString();
            ConnectedPort.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            PortRecieve.Text = "";
         }
 
        
