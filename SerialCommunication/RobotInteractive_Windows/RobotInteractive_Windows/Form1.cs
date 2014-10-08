@@ -16,19 +16,18 @@ namespace RobotInteractive_Windows
     public partial class Form1 : Form
     {
         SerialPort ComPort = new SerialPort();
-        internal delegate void SerialPinChangedEventHandlerDelegate(object sender, SerialPinChangedEventArgs e);
-        private SerialPinChangedEventHandler SerialPinChangedEventHandler1;
+        SerialPort ConnectedPort;
+        string[] PortNames = null;
 
         public Form1()
         {
             InitializeComponent();
-            SerialPinChangedEventHandler1 = new SerialPinChangedEventHandler(PinChanged);
-            ComPort.PinChanged += SerialPinChangedEventHandler1;
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string[] PortNames = null;
+            
             int index = -1;
             string PortNm = null;
 
@@ -81,56 +80,37 @@ namespace RobotInteractive_Windows
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            SerialPinChangedEventHandler1 = new SerialPinChangedEventHandler(PinChanged);
-            ComPort.PinChanged += SerialPinChangedEventHandler1;
-            try
+            ConnectedPort = new SerialPort("COM1",9600,Parity.None,8,StopBits.One);
+            if (!ConnectedPort.IsOpen)
             {
-                ComPort.Open();
+                ConnectedPort.Open();
             }
-            catch (Exception)
-            {
-                MessageBox.Show("IO Exception Occured while openning com port");
-            }
-            ComPort.RtsEnable = true;
-            ComPort.DtrEnable = true;
-            button1.Enabled = false;
+
+            string text = PortMessage.Text;
+            text = text.Remove('\r','\n');
+            ConnectedPort.WriteLine(text);
+            char a = (char)ConnectedPort.ReadChar();
+            char b = (char)ConnectedPort.ReadChar();
+            char c = (char)ConnectedPort.ReadChar();
+            PortRecieve.Text += a.ToString();
+            PortRecieve.Text += b.ToString();
+            PortRecieve.Text += c.ToString();
+            ConnectedPort.Close();
         }
 
-        internal void PinChanged(object sender, SerialPinChangedEventArgs e)
+        void recieve()
         {
-            SerialPinChange SerialPinChange1 = 0;
-            bool signalState = false;
-            SerialPinChange1 = e.EventType;
-            lblCTSStatus.BackColor = Color.Green;
-            lblDSRStatus.BackColor = Color.Green;
-            lblRIStatus.BackColor = Color.Green;
-            lblBreakStatus.BackColor = Color.Green;
-
-            switch (SerialPinChange1)
+          //  ConnectedPort = new SerialPort(PortNames[0], 9600, Parity.None, 8, StopBits.One);
+            if (!ConnectedPort.IsOpen)
             {
-                case SerialPinChange.Break:
-                    lblBreakStatus.BackColor = Color.Red;
-                    //MessageBox.Show("Break is Set");
-                    break;
-                case SerialPinChange.CDChanged:
-                    signalState = ComPort.CtsHolding;
-                    //  MessageBox.Show("CD = " + signalState.ToString());
-                    break;
-                case SerialPinChange.CtsChanged:
-                    signalState = ComPort.CDHolding;
-                    lblCTSStatus.BackColor = Color.Red;
-                    //MessageBox.Show("CTS = " + signalState.ToString());
-                    break;
-                case SerialPinChange.DsrChanged:
-                    signalState = ComPort.DsrHolding;
-                    lblDSRStatus.BackColor = Color.Red;
-                    // MessageBox.Show("DSR = " + signalState.ToString());
-                    break;
-                case SerialPinChange.Ring:
-                    lblRIStatus.BackColor = Color.Red;
-                    //MessageBox.Show("Ring Detected");
-                    break;
+                ConnectedPort.Open();
             }
+
+           int c = ConnectedPort.ReadChar();
+           PortRecieve.Text = c.ToString();
+           ConnectedPort.Close();
         }
+
+       
     }
 }
