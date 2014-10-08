@@ -15,6 +15,7 @@ namespace RobotInteractive_Windows
 
     public partial class Form1 : Form
     {
+        Interpreter interp = new Interpreter();
         SerialPort ComPort = new SerialPort();
         SerialPort ConnectedPort;
         string[] PortNames = null;
@@ -22,7 +23,6 @@ namespace RobotInteractive_Windows
         public Form1()
         {
             InitializeComponent();
-            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -114,6 +114,17 @@ namespace RobotInteractive_Windows
         private void button3_Click(object sender, EventArgs e)
         {
             PortRecieve.Text = "";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string comm = PortMessage.Text;
+            int[] commandArray = interp.interpret(comm);
+
+            foreach (var item in commandArray)
+            {
+                PortRecieve.Text += item.ToString();
+            }
         }
 
        
