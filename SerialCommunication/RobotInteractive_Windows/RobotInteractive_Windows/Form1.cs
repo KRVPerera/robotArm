@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
+using System.Diagnostics;
 
 
 namespace RobotInteractive_Windows
@@ -39,27 +40,43 @@ namespace RobotInteractive_Windows
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            string portName;
-            //get port name from ComboBox
+            
+           
             try
             {
-               // MessageBox.Show("Test1");
-                portName = ComboPorts.Text;
-                MessageBox.Show(portName);
-            //connect to the port
-            ConnectedPort = connect.connectRobot(portName);
+                string portName = ComboPorts.Text; //get port name from ComboBox
+                ConnectedPort = connect.connectRobot(portName);
+              //  MessageBox.Show(portName);
+        
+                string[] codes = inpt.divideIntoLines(PortMessage);
 
-            if (!ConnectedPort.IsOpen)//if not open 
-            {
-                ConnectedPort.Open();
-            }
+                foreach (var item in codes)
+                {
+                    command = inpt.interpret(item);
+                    string sendMessage = "";
+                    for (int i = 0; i < command.Length; i++)
+                    {
+                        char c = (char)command[i];
+                        sendMessage += c.ToString();
+                     }
+                    sendMessage += "a";
+                   sendMessage =  sendMessage.Remove(sendMessage.Length - 1, 1);
+                    Debug.WriteLine(sendMessage);
+                   // ConnectedPort.Write(sendMessage);
+                    ConnectedPort.WriteLine(sendMessage);
+                    System.Threading.Thread.Sleep(100);
 
-            string[] codes = inpt.divideIntoLines(PortMessage);
+                    string recieve = "";
+                    for (int i = 0; i < command.Length; i++)
+                    {
+                        char c = (char)ConnectedPort.ReadChar();
+                        recieve += c.ToString();
+                    }
+                    //ConnectedPort.ReadChar();
+                    PortRecieve.Text = recieve;
 
-            System.Threading.Thread.Sleep(100);
-
-
-            ConnectedPort.Close();
+                }
+                ConnectedPort.Close();
             }
             catch (NullReferenceException)
             {
@@ -75,14 +92,22 @@ namespace RobotInteractive_Windows
                 ConnectedPort.Open();
             }
 
-           int c = ConnectedPort.ReadChar();
-           PortRecieve.Text = c.ToString();
-           ConnectedPort.Close();
+           char c = (char)ConnectedPort.ReadChar();
+           PortRecieve.Text += c.ToString();
+          
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (ConnectedPort != null && ConnectedPort.IsOpen)
+            {
+                ConnectedPort.Close();
+            }
         }
 
        

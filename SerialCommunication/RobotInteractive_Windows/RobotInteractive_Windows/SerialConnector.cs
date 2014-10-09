@@ -16,7 +16,7 @@ namespace RobotInteractive_Windows
         SerialPort ConnectedPort;
         string[] PortNames = null;
         
-        public void scanComPorts(ComboBox ComboPorts)
+        public bool scanComPorts(ComboBox ComboPorts)
         {
             int index = -1;
             string PortNm = null;
@@ -32,13 +32,28 @@ namespace RobotInteractive_Windows
                     ComboPorts.Items.Add(PortNames[index]);
                     ComboPorts.Text = PortNames[0];
                 } while (!((PortNames[index] == PortNm)) || (index == PortNames.GetUpperBound(0)));
-
+                if (index > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (IndexOutOfRangeException)
             {
                 MessageBox.Show("Reading COM ports");
+                if (index <= 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
-
+            
         }
 
 
@@ -48,6 +63,14 @@ namespace RobotInteractive_Windows
             try
             {
                 ConnectedPort = new SerialPort(portName, 9600, Parity.None, 8, StopBits.One);
+                if (!ConnectedPort.IsOpen)//if not open 
+                {
+                    ConnectedPort.Open();
+                }
+                else
+                {
+                    MessageBox.Show("Already open");
+                }
             }
             catch (ArgumentException)
             {
@@ -59,10 +82,14 @@ namespace RobotInteractive_Windows
         
     }
 
+    /*
+        Interpreter class
+     */
     class Interpreter
     {
         public int[] interpret(string command)
         {
+            
             int[] roboCommand = new int[3];
             char motorID;
             int position1 = 0;//1st byte of position
@@ -73,11 +100,13 @@ namespace RobotInteractive_Windows
             string[] sections;
 
             sections = command.Split(' ');
+            
+              
             motorID = sections[1][0];
             Debug.WriteLine(motorID);
             try
             {
-                if (sections[2].Equals("STOP"))
+             if (sections[2].Equals("STOP"))
                 {
                     motorID = (char)(motorID ^ 32);
                 }
@@ -87,7 +116,7 @@ namespace RobotInteractive_Windows
                     {
                         position = Convert.ToInt16(sections[2]);
                     }
-                    catch (System.FormatException e)
+                    catch (System.FormatException)
                     {
                         MessageBox.Show("Use correct format\nEx: Moter A 32547", "Invalid Command",
                MessageBoxButtons.OK, MessageBoxIcon.Error);

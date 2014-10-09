@@ -8,11 +8,10 @@ F:\Rhino\Serial Programming\Buddhika\robotArm\SerialCommunication\RobotInteracti
 F:\Rhino\Serial Programming\Buddhika\robotArm\SerialCommunication\RobotInteractive_Windows\RobotInteractive_Windows\obj\Debug\RobotInteractive_Windows.pdb
 F:\Rhino\Serial Programming\Buddhika\robotArm\SerialCommunication\RobotInteractive_Windows\RobotInteractive_Windows\obj\Debug\RobotInteractive_Windows.Form1.resources
 F:\Rhino\Serial Programming\Buddhika\GIT\robotArm\SerialCommunication\RobotInteractive_Windows\RobotInteractive_Windows\bin\Debug\RobotInteractive_Windows.exe.config
-F:\Rhino\Serial Programming\Buddhika\GIT\robotArm\SerialCommunication\RobotInteractive_Windows\RobotInteractive_Windows\obj\Debug\RobotInteractive_Windows.exe
-F:\Rhino\Serial Programming\Buddhika\GIT\robotArm\SerialCommunication\RobotInteractive_Windows\RobotInteractive_Windows\obj\Debug\RobotInteractive_Windows.pdb
 F:\Rhino\Serial Programming\Buddhika\GIT\robotArm\SerialCommunication\RobotInteractive_Windows\RobotInteractive_Windows\bin\Debug\RobotInteractive_Windows.exe
 F:\Rhino\Serial Programming\Buddhika\GIT\robotArm\SerialCommunication\RobotInteractive_Windows\RobotInteractive_Windows\bin\Debug\RobotInteractive_Windows.pdb
-F:\Rhino\Serial Programming\Buddhika\GIT\robotArm\SerialCommunication\RobotInteractive_Windows\RobotInteractive_Windows\obj\Debug\RobotInteractive_Windows.csprojResolveAssemblyReference.cache
 F:\Rhino\Serial Programming\Buddhika\GIT\robotArm\SerialCommunication\RobotInteractive_Windows\RobotInteractive_Windows\obj\Debug\RobotInteractive_Windows.Form1.resources
 F:\Rhino\Serial Programming\Buddhika\GIT\robotArm\SerialCommunication\RobotInteractive_Windows\RobotInteractive_Windows\obj\Debug\RobotInteractive_Windows.Properties.Resources.resources
 F:\Rhino\Serial Programming\Buddhika\GIT\robotArm\SerialCommunication\RobotInteractive_Windows\RobotInteractive_Windows\obj\Debug\RobotInteractive_Windows.csproj.GenerateResource.Cache
+F:\Rhino\Serial Programming\Buddhika\GIT\robotArm\SerialCommunication\RobotInteractive_Windows\RobotInteractive_Windows\obj\Debug\RobotInteractive_Windows.exe
+F:\Rhino\Serial Programming\Buddhika\GIT\robotArm\SerialCommunication\RobotInteractive_Windows\RobotInteractive_Windows\obj\Debug\RobotInteractive_Windows.pdb

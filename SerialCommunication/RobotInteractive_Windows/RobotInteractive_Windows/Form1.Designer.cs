@@ -29,29 +29,29 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.GetPortsB = new System.Windows.Forms.Button();
+            this.ScanPortsB = new System.Windows.Forms.Button();
             this.PortMessage = new System.Windows.Forms.RichTextBox();
             this.ComboPorts = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.SendMessageB = new System.Windows.Forms.Button();
             this.PortRecieve = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.DisconnectB = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // GetPortsB
+            // ScanPortsB
             // 
-            this.GetPortsB.ForeColor = System.Drawing.Color.DarkMagenta;
-            this.GetPortsB.Location = new System.Drawing.Point(289, 170);
-            this.GetPortsB.Name = "GetPortsB";
-            this.GetPortsB.Size = new System.Drawing.Size(75, 23);
-            this.GetPortsB.TabIndex = 0;
-            this.GetPortsB.Text = "Scan Ports";
-            this.GetPortsB.UseVisualStyleBackColor = true;
-            this.GetPortsB.Click += new System.EventHandler(this.button1_Click);
+            this.ScanPortsB.ForeColor = System.Drawing.Color.DarkMagenta;
+            this.ScanPortsB.Location = new System.Drawing.Point(289, 120);
+            this.ScanPortsB.Name = "ScanPortsB";
+            this.ScanPortsB.Size = new System.Drawing.Size(75, 23);
+            this.ScanPortsB.TabIndex = 0;
+            this.ScanPortsB.Text = "Scan Ports";
+            this.ScanPortsB.UseVisualStyleBackColor = true;
+            this.ScanPortsB.Click += new System.EventHandler(this.button1_Click);
             // 
             // PortMessage
             // 
@@ -68,24 +68,26 @@
             this.ComboPorts.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ComboPorts.ForeColor = System.Drawing.Color.DarkMagenta;
             this.ComboPorts.FormattingEnabled = true;
-            this.ComboPorts.Location = new System.Drawing.Point(264, 143);
+            this.ComboPorts.Location = new System.Drawing.Point(269, 93);
             this.ComboPorts.Name = "ComboPorts";
             this.ComboPorts.Size = new System.Drawing.Size(121, 21);
             this.ComboPorts.TabIndex = 3;
+            this.ComboPorts.Text = "COM PORT";
             // 
-            // button1
+            // SendMessageB
             // 
-            this.button1.Location = new System.Drawing.Point(289, 62);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Send";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.SendMessageB.Location = new System.Drawing.Point(289, 149);
+            this.SendMessageB.Name = "SendMessageB";
+            this.SendMessageB.Size = new System.Drawing.Size(75, 23);
+            this.SendMessageB.TabIndex = 6;
+            this.SendMessageB.Text = "Send";
+            this.SendMessageB.UseVisualStyleBackColor = true;
+            this.SendMessageB.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // PortRecieve
             // 
             this.PortRecieve.BackColor = System.Drawing.Color.DarkBlue;
+            this.PortRecieve.ForeColor = System.Drawing.SystemColors.Info;
             this.PortRecieve.Location = new System.Drawing.Point(416, 51);
             this.PortRecieve.Name = "PortRecieve";
             this.PortRecieve.Size = new System.Drawing.Size(213, 194);
@@ -102,18 +104,6 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.ForeColor = System.Drawing.Color.Cyan;
-            this.label1.Location = new System.Drawing.Point(301, 127);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "COM Port";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -124,7 +114,6 @@
             this.label2.Size = new System.Drawing.Size(91, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Baud Rate : 9600";
-            this.label2.Click += new System.EventHandler(this.label1_Click);
             // 
             // label3
             // 
@@ -136,7 +125,6 @@
             this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "Data Bits : 8";
-            this.label3.Click += new System.EventHandler(this.label1_Click);
             // 
             // label4
             // 
@@ -148,7 +136,6 @@
             this.label4.Size = new System.Drawing.Size(102, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "Hand Shake : None";
-            this.label4.Click += new System.EventHandler(this.label1_Click);
             // 
             // label5
             // 
@@ -162,25 +149,35 @@
             this.label5.Size = new System.Drawing.Size(73, 13);
             this.label5.TabIndex = 7;
             this.label5.Text = "Stop Bit : One";
-            this.label5.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // DisconnectB
+            // 
+            this.DisconnectB.Location = new System.Drawing.Point(289, 178);
+            this.DisconnectB.Name = "DisconnectB";
+            this.DisconnectB.Size = new System.Drawing.Size(75, 23);
+            this.DisconnectB.TabIndex = 8;
+            this.DisconnectB.Text = "Disconnect";
+            this.DisconnectB.UseVisualStyleBackColor = true;
+            this.DisconnectB.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.MidnightBlue;
             this.BackgroundImage = global::RobotInteractive_Windows.Properties.Resources.connect_e1324382075648_600;
             this.ClientSize = new System.Drawing.Size(656, 272);
+            this.Controls.Add(this.DisconnectB);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.SendMessageB);
             this.Controls.Add(this.ComboPorts);
             this.Controls.Add(this.PortRecieve);
             this.Controls.Add(this.PortMessage);
-            this.Controls.Add(this.GetPortsB);
+            this.Controls.Add(this.ScanPortsB);
             this.ForeColor = System.Drawing.Color.DarkMagenta;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -196,17 +193,17 @@
 
         #endregion
 
-        private System.Windows.Forms.Button GetPortsB;
+        private System.Windows.Forms.Button ScanPortsB;
         private System.Windows.Forms.RichTextBox PortMessage;
         private System.Windows.Forms.ComboBox ComboPorts;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button SendMessageB;
         private System.Windows.Forms.RichTextBox PortRecieve;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button DisconnectB;
     }
 }
 
