@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace RobotInteractive_Windows
 {
+<<<<<<< HEAD
     class Interpreter
     {
         public int[] interpret(string command)
@@ -70,4 +71,7 @@ namespace RobotInteractive_Windows
             return roboCommand;
         }
     }
+=======
+   
+>>>>>>> 0e17c62c0e59388742a2765357a2057a8bedb8fd
 }
