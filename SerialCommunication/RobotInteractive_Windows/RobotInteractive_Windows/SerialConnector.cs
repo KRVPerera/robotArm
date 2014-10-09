@@ -45,7 +45,15 @@ namespace RobotInteractive_Windows
         public SerialPort connectRobot(string portName)
         {
             //selected values according to robots Atmega2560
-            ConnectedPort = new SerialPort(portName, 9600, Parity.None, 8, StopBits.One);
+            try
+            {
+                ConnectedPort = new SerialPort(portName, 9600, Parity.None, 8, StopBits.One);
+            }
+            catch (ArgumentException)
+            {
+                MessageBox.Show("Invalid arguments for serial port open command");
+                ConnectedPort = null;
+            }
             return ConnectedPort;
         }
         
@@ -112,21 +120,13 @@ namespace RobotInteractive_Windows
             return roboCommand;
         }
 
-        public void divideIntoLines( RichTextBox rtbCode )
+        public string[] divideIntoLines(RichTextBox rtbCode)
         {
             //LineNum
             string readCode = rtbCode.Text;
-            StreamReader sd = new StreamReader(readCode);
-            Queue<string> code = new Queue<string>();
-            for (int i = 0; i < rtbCode.Lines.Length; i++)
-            {
-                string line = sd.ReadLine();
-                code.Enqueue(line);
-                Debug.WriteLine(line);
-                //sw.WriteLine(rtbCode.Lines[i]);
-            }
-    
-
+            string[] arr = readCode.Split('\n');
+          //  StreamReader sd = new StreamReader(readCode);
+            return arr;
         }
 
 
