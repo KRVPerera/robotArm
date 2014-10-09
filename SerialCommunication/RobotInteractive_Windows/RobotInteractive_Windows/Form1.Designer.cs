@@ -28,20 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.GetPortsB = new System.Windows.Forms.Button();
             this.PortMessage = new System.Windows.Forms.RichTextBox();
             this.ComboPorts = new System.Windows.Forms.ComboBox();
-            this.ComboBaudRates = new System.Windows.Forms.ComboBox();
-            this.ComboDataBits = new System.Windows.Forms.ComboBox();
-            this.ComboHandShake = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.PortRecieve = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // GetPortsB
             // 
-            this.GetPortsB.Location = new System.Drawing.Point(349, 159);
+            this.GetPortsB.Location = new System.Drawing.Point(261, 63);
             this.GetPortsB.Name = "GetPortsB";
             this.GetPortsB.Size = new System.Drawing.Size(75, 23);
             this.GetPortsB.TabIndex = 0;
@@ -51,7 +53,7 @@
             // 
             // PortMessage
             // 
-            this.PortMessage.Location = new System.Drawing.Point(28, 34);
+            this.PortMessage.Location = new System.Drawing.Point(12, 34);
             this.PortMessage.Name = "PortMessage";
             this.PortMessage.Size = new System.Drawing.Size(213, 172);
             this.PortMessage.TabIndex = 2;
@@ -60,38 +62,14 @@
             // ComboPorts
             // 
             this.ComboPorts.FormattingEnabled = true;
-            this.ComboPorts.Location = new System.Drawing.Point(326, 34);
+            this.ComboPorts.Location = new System.Drawing.Point(441, 6);
             this.ComboPorts.Name = "ComboPorts";
             this.ComboPorts.Size = new System.Drawing.Size(121, 21);
             this.ComboPorts.TabIndex = 3;
             // 
-            // ComboBaudRates
-            // 
-            this.ComboBaudRates.FormattingEnabled = true;
-            this.ComboBaudRates.Location = new System.Drawing.Point(326, 61);
-            this.ComboBaudRates.Name = "ComboBaudRates";
-            this.ComboBaudRates.Size = new System.Drawing.Size(121, 21);
-            this.ComboBaudRates.TabIndex = 4;
-            // 
-            // ComboDataBits
-            // 
-            this.ComboDataBits.FormattingEnabled = true;
-            this.ComboDataBits.Location = new System.Drawing.Point(326, 88);
-            this.ComboDataBits.Name = "ComboDataBits";
-            this.ComboDataBits.Size = new System.Drawing.Size(121, 21);
-            this.ComboDataBits.TabIndex = 5;
-            // 
-            // ComboHandShake
-            // 
-            this.ComboHandShake.FormattingEnabled = true;
-            this.ComboHandShake.Location = new System.Drawing.Point(326, 115);
-            this.ComboHandShake.Name = "ComboHandShake";
-            this.ComboHandShake.Size = new System.Drawing.Size(121, 21);
-            this.ComboHandShake.TabIndex = 5;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(268, 159);
+            this.button1.Location = new System.Drawing.Point(261, 34);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 6;
@@ -101,7 +79,7 @@
             // 
             // PortRecieve
             // 
-            this.PortRecieve.Location = new System.Drawing.Point(541, 34);
+            this.PortRecieve.Location = new System.Drawing.Point(385, 36);
             this.PortRecieve.Name = "PortRecieve";
             this.PortRecieve.Size = new System.Drawing.Size(213, 172);
             this.PortRecieve.TabIndex = 2;
@@ -109,7 +87,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(430, 159);
+            this.button2.Location = new System.Drawing.Point(261, 92);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 6;
@@ -117,24 +95,72 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(382, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "COM Port";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(25, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(91, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Baud Rate : 9600";
+            this.label2.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(122, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Data Bits : 8";
+            this.label3.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(193, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(102, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Hand Shake : None";
+            this.label4.Click += new System.EventHandler(this.label1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 232);
+            this.BackgroundImage = global::RobotInteractive_Windows.Properties.Resources.connect_e1324382075648_600;
+            this.ClientSize = new System.Drawing.Size(649, 242);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.ComboHandShake);
-            this.Controls.Add(this.ComboDataBits);
-            this.Controls.Add(this.ComboBaudRates);
             this.Controls.Add(this.ComboPorts);
             this.Controls.Add(this.PortRecieve);
             this.Controls.Add(this.PortMessage);
             this.Controls.Add(this.GetPortsB);
+            this.ForeColor = System.Drawing.Color.DarkMagenta;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Robo Talk";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -143,12 +169,13 @@
         private System.Windows.Forms.Button GetPortsB;
         private System.Windows.Forms.RichTextBox PortMessage;
         private System.Windows.Forms.ComboBox ComboPorts;
-        private System.Windows.Forms.ComboBox ComboBaudRates;
-        private System.Windows.Forms.ComboBox ComboDataBits;
-        private System.Windows.Forms.ComboBox ComboHandShake;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox PortRecieve;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 
