@@ -17,7 +17,7 @@ namespace RobotInteractive_Windows
     {
         
         SerialConnector connect = new SerialConnector();
-        Interpreter 
+        Interpreter inpt = new Interpreter();
 
         SerialPort ConnectedPort;
         int[] command;
@@ -39,8 +39,12 @@ namespace RobotInteractive_Windows
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            string portName;
             //get port name from ComboBox
-            string portName = ComboPorts.SelectedValue.ToString();
+            try
+            {
+                portName = ComboPorts.SelectedValue.ToString();
+           
             //connect to the port
             ConnectedPort = connect.connectRobot(portName);
 
@@ -49,20 +53,26 @@ namespace RobotInteractive_Windows
                 ConnectedPort.Open();
             }
 
-            string text = PortMessage.Text; // get the command from the text box
-            text = text.Remove(text.Length-1,text.Length);
+            inpt.divideIntoLines(PortMessage);
+          //  string text = PortMessage.Text; // get the command from the text box
+           // text = text.Remove(text.Length-1,text.Length);
 
-            ConnectedPort.WriteLine(text);
-
+          //  ConnectedPort.WriteLine(text);
+//
             System.Threading.Thread.Sleep(100);
 
-            char a = (char)ConnectedPort.ReadChar();
-            char b = (char)ConnectedPort.ReadChar();
-            char c = (char)ConnectedPort.ReadChar();
-            PortRecieve.Text += a.ToString();
-            PortRecieve.Text += b.ToString();
-            PortRecieve.Text += c.ToString();
+          //  char a = (char)ConnectedPort.ReadChar();
+          //  char b = (char)ConnectedPort.ReadChar();
+          //  char c = (char)ConnectedPort.ReadChar();
+          //  PortRecieve.Text += a.ToString();
+          //  PortRecieve.Text += b.ToString();
+           // PortRecieve.Text += c.ToString();
             ConnectedPort.Close();
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Please enter a valid message to decode and send..!!");
+            } 
         }
 
         void recieve()

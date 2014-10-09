@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO.Ports;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 namespace RobotInteractive_Windows
 {
@@ -110,5 +111,24 @@ namespace RobotInteractive_Windows
 
             return roboCommand;
         }
-    }
+
+        public void divideIntoLines( RichTextBox rtbCode )
+        {
+            //LineNum
+            string readCode = rtbCode.Text;
+            StreamReader sd = new StreamReader(readCode);
+            Queue<string> code = new Queue<string>();
+            for (int i = 0; i < rtbCode.Lines.Length; i++)
+            {
+                string line = sd.ReadLine();
+                code.Enqueue(line);
+                Debug.WriteLine(line);
+                //sw.WriteLine(rtbCode.Lines[i]);
+            }
+    
+
+        }
+
+
+    }//Interpreter Class
 }
