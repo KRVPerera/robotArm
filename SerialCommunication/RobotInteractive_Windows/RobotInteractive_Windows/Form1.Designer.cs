@@ -39,11 +39,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // GetPortsB
             // 
-            this.GetPortsB.Location = new System.Drawing.Point(261, 63);
+            this.GetPortsB.Location = new System.Drawing.Point(289, 170);
             this.GetPortsB.Name = "GetPortsB";
             this.GetPortsB.Size = new System.Drawing.Size(75, 23);
             this.GetPortsB.TabIndex = 0;
@@ -53,23 +54,23 @@
             // 
             // PortMessage
             // 
-            this.PortMessage.Location = new System.Drawing.Point(12, 34);
+            this.PortMessage.Location = new System.Drawing.Point(28, 49);
             this.PortMessage.Name = "PortMessage";
-            this.PortMessage.Size = new System.Drawing.Size(213, 172);
+            this.PortMessage.Size = new System.Drawing.Size(213, 196);
             this.PortMessage.TabIndex = 2;
             this.PortMessage.Text = "";
             // 
             // ComboPorts
             // 
             this.ComboPorts.FormattingEnabled = true;
-            this.ComboPorts.Location = new System.Drawing.Point(441, 6);
+            this.ComboPorts.Location = new System.Drawing.Point(264, 143);
             this.ComboPorts.Name = "ComboPorts";
             this.ComboPorts.Size = new System.Drawing.Size(121, 21);
             this.ComboPorts.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(261, 34);
+            this.button1.Location = new System.Drawing.Point(289, 62);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 6;
@@ -79,15 +80,15 @@
             // 
             // PortRecieve
             // 
-            this.PortRecieve.Location = new System.Drawing.Point(385, 36);
+            this.PortRecieve.Location = new System.Drawing.Point(416, 51);
             this.PortRecieve.Name = "PortRecieve";
-            this.PortRecieve.Size = new System.Drawing.Size(213, 172);
+            this.PortRecieve.Size = new System.Drawing.Size(213, 194);
             this.PortRecieve.TabIndex = 2;
             this.PortRecieve.Text = "";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(261, 92);
+            this.button2.Location = new System.Drawing.Point(503, 9);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 6;
@@ -98,7 +99,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(382, 9);
+            this.label1.Location = new System.Drawing.Point(301, 111);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 7;
@@ -108,7 +109,9 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 9);
+            this.label2.BackColor = System.Drawing.Color.MidnightBlue;
+            this.label2.ForeColor = System.Drawing.Color.Cyan;
+            this.label2.Location = new System.Drawing.Point(25, 19);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 13);
             this.label2.TabIndex = 7;
@@ -118,7 +121,9 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(122, 9);
+            this.label3.BackColor = System.Drawing.Color.MidnightBlue;
+            this.label3.ForeColor = System.Drawing.Color.Cyan;
+            this.label3.Location = new System.Drawing.Point(122, 19);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 7;
@@ -128,19 +133,36 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(193, 9);
+            this.label4.BackColor = System.Drawing.Color.MidnightBlue;
+            this.label4.ForeColor = System.Drawing.Color.Cyan;
+            this.label4.Location = new System.Drawing.Point(193, 18);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(102, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "Hand Shake : None";
             this.label4.Click += new System.EventHandler(this.label1_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.MidnightBlue;
+            this.label5.Enabled = false;
+            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label5.ForeColor = System.Drawing.Color.Cyan;
+            this.label5.Location = new System.Drawing.Point(301, 19);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(73, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Stop Bit : One";
+            this.label5.Click += new System.EventHandler(this.label1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::RobotInteractive_Windows.Properties.Resources.connect_e1324382075648_600;
-            this.ClientSize = new System.Drawing.Size(649, 242);
+            this.ClientSize = new System.Drawing.Size(656, 272);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -176,6 +198,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
 

@@ -17,7 +17,10 @@ namespace RobotInteractive_Windows
     {
         
         SerialConnector connect = new SerialConnector();
+        Interpreter 
+
         SerialPort ConnectedPort;
+        int[] command;
 
         public Form1()
         {
@@ -36,17 +39,23 @@ namespace RobotInteractive_Windows
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            //get port name from ComboBox
             string portName = ComboPorts.SelectedValue.ToString();
+            //connect to the port
             ConnectedPort = connect.connectRobot(portName);
 
-            if (!ConnectedPort.IsOpen)
+            if (!ConnectedPort.IsOpen)//if not open 
             {
                 ConnectedPort.Open();
             }
 
-            string text = PortMessage.Text;
-            text = text.Remove('\r','\n');
+            string text = PortMessage.Text; // get the command from the text box
+            text = text.Remove(text.Length-1,text.Length);
+
             ConnectedPort.WriteLine(text);
+
+            System.Threading.Thread.Sleep(100);
+
             char a = (char)ConnectedPort.ReadChar();
             char b = (char)ConnectedPort.ReadChar();
             char c = (char)ConnectedPort.ReadChar();
